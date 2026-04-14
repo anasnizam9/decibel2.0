@@ -10,16 +10,7 @@ module.exports = {
         "g-bright": "#4cd94c",
       },
       fontFamily: {
-        sans: [
-          "NunitoSans",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Arial",
-          "sans-serif",
-        ],
+        sans: ["Nunito Sans", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
       },
     },
   },

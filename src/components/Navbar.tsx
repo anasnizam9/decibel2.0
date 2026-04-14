@@ -46,7 +46,7 @@ const enablingHrProcessesDropdown: MenuItem[] = [
   { label: "Attendance Management", href: "/attendance" },
   { label: "Leave Management", href: "/leave" },
   { label: "Expense Management", href: "/expense" },
-  { label: "Travel & ExpenseManagement", href: "/travel" },
+  { label: "Travel Management", href: "/travel" },
   { label: "Employee Services", href: "/employee" },
   { label: "Employee Asset Management", href: "/employee-asset" },
   { label: "People Helpdesk", href: "/helpdesk" },
@@ -340,10 +340,9 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-1">
           <img
-            src="/images/header.png"
+            src="/images/footer.png"
             alt="Logo"
-            className="h-20 w-20 object-contain"
-            style={{ maxHeight: "60px", maxWidth: "80px" }}
+            className="-ml-3 h-[60px] w-auto object-contain"
           />
         </Link>
 

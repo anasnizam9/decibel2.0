@@ -76,14 +76,14 @@ function LeaderCard({ leader, onClick }: { leader: Leader; onClick: () => void }
       <div className="px-5 py-4 text-center">
         <h3
           className="text-[17px] font-bold text-[#1D9E75]"
-          style={{ fontFamily: "Syne, sans-serif" }}
+          style={{ fontFamily: "Nunito Sans, sans-serif" }}
         >
           {leader.name}
         </h3>
         <div className="mx-auto my-2 h-[2px] w-8 rounded-full bg-[#1D9E75] opacity-60" />
         <p
           className="text-[11px] font-semibold uppercase tracking-widest text-gray-400"
-          style={{ fontFamily: "DM Sans, sans-serif" }}
+          style={{ fontFamily: "Nunito Sans, sans-serif" }}
         >
           {leader.title}
         </p>

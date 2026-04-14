@@ -75,7 +75,7 @@ export default function SuccessionPlanningPage() {
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
             <div className="text-white">
               <h1 className="text-4xl font-bold md:text-5xl">
-                Employee Data Management
+                HR Analytics
               </h1>
               <p className="mt-5 max-w-[620px] text-base leading-relaxed md:text-lg">
                Decibel excels in accuracy, security, and efficiency. We ensure businesses have the easiest and quickest way of accessing the information and track employee data. We streamline data management and limit all lengthy processes.
@@ -105,7 +105,7 @@ export default function SuccessionPlanningPage() {
         <div className="mx-auto max-w-4xl px-6">
           <div className="mx-auto max-w-3xl overflow-hidden rounded-xl border-4 border-green-500 bg-white shadow-[0_10px_28px_rgba(0,0,0,0.15)]">
             <img
-              src="/images/Decibel_Desktop-2048x1458.jpg"
+              src="/images/dashnew.png"
               alt="Succession Planning Product Interface"
               className="h-auto w-full object-cover"
             />
@@ -180,8 +180,8 @@ export default function SuccessionPlanningPage() {
             {/* Image */}
             <div className="flex items-center justify-center">
               <img
-                src="/images/succession planning.jpeg"
-                alt="Succession Planning Feature Interface"
+                src="/images/analytics.png"
+                alt="Analytics Feature Interface"
                 className="rounded-2xl border-4 border-[#238c43] shadow-lg"
               />
             </div>

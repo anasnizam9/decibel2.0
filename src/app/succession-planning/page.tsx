@@ -96,7 +96,7 @@ export default function SuccessionPlanningPage() {
         <div className="mx-auto max-w-4xl px-6">
           <div className="mx-auto max-w-3xl overflow-hidden rounded-xl border-4 border-green-500 bg-white shadow-[0_10px_28px_rgba(0,0,0,0.15)]">
             <img
-              src="/images/Decibel_Desktop-2048x1458.jpg"
+              src="/images/talent.png"
               alt="Succession Planning Product Interface"
               className="h-auto w-full object-cover"
             />
@@ -171,7 +171,7 @@ export default function SuccessionPlanningPage() {
             {/* Image */}
             <div className="flex items-center justify-center">
               <img
-                src="/images/succession planning.jpeg"
+                src="/images/succ.png"
                 alt="Succession Planning Feature Interface"
                 className="rounded-2xl border-4 border-[#238c43] shadow-lg"
               />

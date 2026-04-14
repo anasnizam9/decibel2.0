@@ -362,17 +362,767 @@
 //   );
 // }
 
+// "use client";
+
+// import { useEffect, useState, useCallback, useRef } from "react";
+
+// const SLIDE_DURATION = 15000;
+// const FADE_DURATION = 850;
+// const TOTAL_SLIDES = 5;
+
+// const DARK_BG = "linear-gradient(135deg, #154d46 0%, #13674f 25%, #22b840 60%, #82e8a6 100%)";
+// const BRAND_BG = "linear-gradient(135deg, #154d46 0%, #13674f 25%, #22b840 60%, #82e8a6 100%)";
+
+// function Slide1() {
+//   return (
+//     <section
+//       className="overflow-hidden w-full h-full flex flex-col"
+//       style={{ background: BRAND_BG }}
+//     >
+//       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-10 text-center md:pt-12">
+//         <h1
+//           className="text-3xl font-bold text-white md:text-5xl"
+//           style={{ fontFamily: "Nunito Sans, sans-serif" }}
+//         >
+//           The Largest Enterprise Cloud in Pakistan Powering Human Connections with AI
+//         </h1>
+//         <p
+//           className="mt-0.5 text-base text-white md:text-lg"
+//           style={{ fontFamily: "Nunito Sans, sans-serif" }}
+//         >
+//           Decibel simplifies your HR digital transformation across all processes, from onboarding to retirement
+//         </p>
+//       </div>
+//       <div className="relative z-0 -mt-20 flex-1 w-full overflow-hidden md:-mt-24">
+//         <img
+//           src="/images/Artboard 3.png"
+//           alt="Hero Section"
+//           style={{
+//             width: "100%",
+//             height: "calc(100% + 70px)",
+//             objectFit: "cover",
+//             objectPosition: "center top",
+//             transform: "translateY(-105px) scale(0.9)",
+//             display: "block",
+//           }}
+//         />
+//       </div>
+//     </section>
+//   );
+// }
+
+// function DarkSlide({ headline, body, cta, visual }: any) {  return (
+//     <div
+//       style={{
+//         width: "100%",
+//         height: "100%",
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         background: DARK_BG,
+//         padding: "40px 48px",
+//         boxSizing: "border-box",
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           alignItems: "center",
+//           gap: "clamp(40px, 7vw, 100px)",
+//           maxWidth: "1400px",
+//           width: "100%",
+//         }}
+//       >
+//         {/* LEFT — TEXT */}
+//         <div style={{ flex: "0 0 38%" }}>
+//           <h2 style={{
+//             fontFamily: "Nunito Sans, sans-serif",
+//             fontSize: "clamp(2.2rem, 3.8vw, 3.4rem)",
+//             fontWeight: 800,
+//             color: "#f5fff8",
+//             lineHeight: 1.25,
+//             marginBottom: 10,
+//             textTransform: "uppercase",
+//           }}>
+//             {headline.map((part: any, i: number) =>
+//               part.yellow
+//                 ? <span key={i} style={{ color: "#4cf29a" }}>{part.text}</span>
+//                 : <span key={i}>{part.text}</span>
+//             )}
+//           </h2>
+
+//           <p style={{
+//             fontSize: 16,
+//             color: "rgba(205, 221, 211, 0.72)",
+//             lineHeight: 1.65,
+//             margin: "14px 0 28px 0",
+//             maxWidth: 420,
+//           }}>
+//             {body}
+//           </p>
+//         </div>
+
+//         {/* RIGHT — MOCKUP */}
+//         <div style={{
+//           flex: "0 0 55%",
+//           display: "flex",
+//           justifyContent: "center",
+//         }}>
+//           {visual}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function ScreenFrame({ children }: any) {  return (
+//     <div style={{
+//   width: "clamp(340px, 52vw, 550px)",
+//       aspectRatio: "4 / 3",
+//       background: "linear-gradient(145deg, #1c1c1c, #2a2a2a, #111)",
+//       borderRadius: 28,
+//       padding: 14,
+//       boxShadow: `
+//         0 0 0 1px rgba(0,0,0,0.08),
+//         0 40px 80px rgba(0,0,0,0.18),
+//         0 8px 30px rgba(0,0,0,0.1),
+//         inset 0 1px 0 rgba(255,255,255,0.08)
+//       `,
+//       position: "relative",
+//       overflow: "hidden",
+//       zIndex: 1,
+//     }}>
+//       <div style={{
+//         width: "100%",
+//         height: "100%",
+//         borderRadius: 16,
+//         overflow: "hidden",
+//         background: "#000",
+//         position: "relative",
+//         display: "flex",          // ✅ added
+//         alignItems: "center",     // ✅ added
+//         justifyContent: "center", // ✅ added
+//       }}>
+//         {children}
+//       </div>
+//       <div style={{
+//         position: "absolute",
+//         bottom: 6,
+//         left: "50%",
+//         transform: "translateX(-50%)",
+//         width: 60,
+//         height: 3,
+//         borderRadius: 2,
+//         background: "rgba(255,255,255,0.25)",
+//       }} />
+//     </div>
+//   );
+// }
+
+// function VideoMockup({ src }: any) {
+//   const videoRef = useRef<HTMLVideoElement | null>(null);
+//   const [muted, setMuted] = useState(true);
+
+//   const toggleMute = () => {
+//     if (videoRef.current) {
+//       videoRef.current.muted = !videoRef.current.muted;
+//       setMuted(videoRef.current.muted);
+//     }
+//   };
+
+//   return (
+//     <ScreenFrame>
+//       <video
+//         ref={videoRef}
+//         src={src}
+//         autoPlay
+//         loop
+//         muted
+//         playsInline
+//         style={{
+//           position: "absolute",
+//           inset: 0,
+//           width: "100%",
+//           height: "100%",
+//           objectFit: "cover",          // ✅ cover
+//           objectPosition: "center center",
+//           borderRadius: "16px",        // ✅ added
+//           display: "block",            // ✅ added
+
+//         }}
+//       />
+//       <button
+//         onClick={toggleMute}
+//         style={{
+//           position: "absolute",
+//           bottom: 12,
+//           left: 12,
+//           zIndex: 4,
+//           width: 28,
+//           height: 28,
+//           borderRadius: "50%",
+//           background: "rgba(0,0,0,0.65)",
+//           border: "1px solid rgba(255,255,255,0.15)",
+//           display: "flex",
+//           alignItems: "center",
+//           justifyContent: "center",
+//           cursor: "pointer",
+//           fontSize: 10,
+//           color: "white",
+//         }}
+//       >
+//         {muted ? "🔇" : "🔊"}
+//       </button>
+//     </ScreenFrame>
+//   );
+// }
+
+// const SLIDES_CONFIG = [
+//   null,
+//   {
+//     headline: [
+//       { text: "Transforming Your Journey with AI and ML: " },
+//       { text: "A Seamless Technological Enhancement", yellow: true },
+//     ],
+//     body: "Streamline HR with a cloud-based solution that saves time and costs—so you can focus on core operations.",
+//     cta: "Explore AI Features",
+//     visual: <VideoMockup src="/images/0411(2).mp4" />,
+//   },
+//   {
+//     headline: [
+//       { text: "Zero Errors. Zero Delays. " },
+//       { text: "Payroll On Autopilot.", yellow: true },
+//     ],
+//     body: "Fully automated payroll processing with tax compliance, multi-currency support, and one-click disbursement across Pakistan and beyond.",
+//     cta: "See Payroll Module",
+//     visual: <VideoMockup src="/images/0330(3).mp4" />,
+//   },
+//   {
+//     headline: [
+//       { text: "Hire Smarter, Hire Faster " },
+//       { text: "with AI Matching.", yellow: true },
+//     ],
+//     body: "Let AI rank and shortlist your best-fit candidates automatically. Reduce time-to-hire by 60% with Decibel's intelligent recruitment engine.",
+//     cta: "Explore Talent Module",
+//     visual: <VideoMockup src="/images/0330(3).mp4" />,
+//   },
+//   {
+//     headline: [
+//       { text: "Every Employee. Every Journey. " },
+//       { text: "One Platform.", yellow: true },
+//     ],
+//     body: "From goals to recognition, leaves to performance — give your people a workspace they'll love logging into every single day.",
+//     cta: "Explore EX Module",
+//     visual: <VideoMockup src="/images/0330(3).mp4" />,
+//   },
+// ];
+
+// export default function HeroSection() {
+//   const [current, setCurrent] = useState(0);
+//   const [prev, setPrev] = useState<number | null>(null);
+//   const [fading, setFading] = useState(false);
+
+//   const goTo = useCallback((next: number) => {
+//     if (fading) return;
+//     setFading(true);
+//     setPrev(current);
+//     setCurrent(next);
+//     setTimeout(() => { setPrev(null); setFading(false); }, FADE_DURATION);
+//   }, [current, fading]);
+
+//   useEffect(() => {
+//     const t = setInterval(() => goTo((current + 1) % TOTAL_SLIDES), SLIDE_DURATION);
+//     return () => clearInterval(t);
+//   }, [current, goTo]);
+
+//   const renderSlide = (idx: number) => {
+//     if (idx === 0) return <Slide1 />;
+//     const cfg = SLIDES_CONFIG[idx];
+//     if (!cfg) return <Slide1 />;
+//     return <DarkSlide headline={cfg.headline} body={cfg.body} cta={cfg.cta} visual={cfg.visual} />;
+//   };
+
+//   return (
+//     <>
+//       <section style={{ position: "relative", width: "100%", height: "112vh", minHeight: 700, overflow: "hidden" }}>
+//         {prev !== null && (
+//           <div key={`exit-${prev}`} className="hero-slide-out" style={{ position: "absolute", inset: 0, zIndex: 1 }}>
+//             {renderSlide(prev)}
+//           </div>
+//         )}
+//         <div key={`enter-${current}`} className="hero-slide-in" style={{ position: "absolute", inset: 0, zIndex: 2 }}>
+//           {renderSlide(current)}
+//         </div>
+
+//         {/* dot nav */}
+//         <div style={{
+//           position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)",
+//           zIndex: 200, display: "flex", gap: 8, alignItems: "center",
+//         }}>
+//           {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
+//             <button
+//               key={i}
+//               onClick={() => goTo(i)}
+//               aria-label={`Go to slide ${i + 1}`}
+//               style={{
+//                 width: current === i ? 28 : 8, height: 8, borderRadius: 4,
+//                 padding: 0, border: "none", cursor: "pointer",
+//                 background: current === i ? "#22c55e" : "rgba(255,255,255,0.25)",
+//                 transition: "all 0.35s ease",
+//               }}
+//             />
+//           ))}
+//         </div>
+//       </section>
+//     </>
+//   );
+// }
+
+// "use client";
+
+// import { useEffect, useState, useCallback, useRef } from "react";
+
+// const SLIDE_DURATION = 15000;
+// const FADE_DURATION = 850;
+// const TOTAL_SLIDES = 5;
+
+// const DARK_BG = "linear-gradient(135deg, #154d46 0%, #13674f 25%, #22b840 60%, #82e8a6 100%)";
+// const BRAND_BG = "linear-gradient(135deg, #154d46 0%, #13674f 25%, #22b840 60%, #82e8a6 100%)";
+
+// function Slide1() {
+//   return (
+//     <section
+//       className="overflow-hidden w-full h-full flex flex-col"
+//       style={{ background: BRAND_BG }}
+//     >
+//       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-10 text-center md:pt-12">
+//         <h1
+//           className="text-3xl font-bold text-white md:text-5xl"
+//           style={{ fontFamily: "Nunito Sans, sans-serif" }}
+//         >
+//           The Largest Enterprise Cloud in Pakistan Powering Human Connections with AI
+//         </h1>
+//         <p
+//           className="mt-0.5 text-base text-white md:text-lg"
+//           style={{ fontFamily: "Nunito Sans, sans-serif" }}
+//         >
+//           Decibel simplifies your HR digital transformation across all processes, from onboarding to retirement
+//         </p>
+//       </div>
+//       <div className="relative z-0 -mt-20 flex-1 w-full overflow-hidden md:-mt-24">
+//         <img
+//           src="/images/Artboard 3.png"
+//           alt="Hero Section"
+//           style={{
+//             width: "100%",
+//             height: "calc(100% + 70px)",
+//             objectFit: "cover",
+//             objectPosition: "center top",
+//             transform: "translateY(-105px) scale(0.9)",
+//             display: "block",
+//           }}
+//         />
+//       </div>
+//     </section>
+//   );
+// }
+
+// function DarkSlide({ headline, body, cta, visual }: any) {
+//   return (
+//     <div
+//       style={{
+//         width: "100%",
+//         height: "100%",
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         background: DARK_BG,
+//         padding: "40px 48px",
+//         boxSizing: "border-box",
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           alignItems: "center",
+//           gap: "clamp(40px, 7vw, 100px)",
+//           maxWidth: "1400px",
+//           width: "100%",
+//         }}
+//       >
+//         {/* LEFT — TEXT */}
+//         <div style={{ flex: "0 0 38%" }}>
+//           <h2
+//             style={{
+//               fontFamily: "Nunito Sans, sans-serif",
+//               fontSize: "clamp(2.2rem, 3.8vw, 3.4rem)",
+//               fontWeight: 800,
+//               color: "#f5fff8",
+//               lineHeight: 1.25,
+//               marginBottom: 10,
+//               textTransform: "uppercase",
+//             }}
+//           >
+//             {headline.map((part: any, i: number) =>
+//               part.yellow ? (
+//                 <span key={i} style={{ color: "#4cf29a" }}>
+//                   {part.text}
+//                 </span>
+//               ) : (
+//                 <span key={i}>{part.text}</span>
+//               )
+//             )}
+//           </h2>
+
+//           <p
+//             style={{
+//               fontSize: 16,
+//               color: "rgba(205, 221, 211, 0.72)",
+//               lineHeight: 1.65,
+//               margin: "14px 0 28px 0",
+//               maxWidth: 420,
+//             }}
+//           >
+//             {body}
+//           </p>
+//         </div>
+
+//         {/* RIGHT — VISUAL */}
+//         <div
+//           style={{
+//             flex: "0 0 55%",
+//             display: "flex",
+//             justifyContent: "center",
+//             alignItems: "flex-end",
+//           }}
+//         >
+//           {visual}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// /* ─── Both images side by side like reference image ─── */
+// function DualImageVisual() {
+//   return (
+//     <div
+//       style={{
+//         position: "relative",
+//         width: "100%",
+//         height: "clamp(380px, 50vh, 600px)",
+//         display: "flex",
+//         justifyContent: "center",
+//         alignItems: "center",
+//         paddingRight: "12%", // 👈 mobile ke liye jagah
+//         boxSizing: "border-box",
+//       }}
+//     >
+//       {/* Desktop Frame */}
+//       <div
+//         style={{
+//           width: "100%",
+//           height: "100%",
+//           borderRadius: "22px",
+//           overflow: "hidden",
+//           zIndex: 1,
+//           boxShadow: "0 30px 70px rgba(0,0,0,0.5)",
+//         }}
+//       >
+//         <img
+//           src="/images/dashnew.png"
+//           alt="Dashboard"
+//           style={{
+//             width: "100%",
+//             height: "100%",
+//             objectFit: "cover",       // ✅ frame poora bhare
+//             objectPosition: "top left",
+//           }}
+//         />
+//       </div>
+
+//       {/* Mobile Frame */}
+//       <div
+//         style={{
+//           position: "absolute",
+//           bottom: "-5%",             // ✅ thoda neeche float effect
+//           right: "0%",              // ✅ overflow nahi hoga
+//           width: "24%",
+//           height: "88%",
+//           borderRadius: "28px",
+//           overflow: "hidden",
+//           zIndex: 3,
+//           boxShadow: "0 30px 60px rgba(0,0,0,0.65)",
+//         }}
+//       >
+//         <img
+//           src="/images/mobile.png"
+//           alt="Mobile"
+//           style={{
+//             width: "100%",
+//             height: "100%",
+//             objectFit: "cover",      // ✅ frame poora bhare
+//             objectPosition: "top center",
+//           }}
+//         />
+//       </div>
+//     </div>
+//   );
+// }
+// function VideoMockup({ src }: any) {
+//   const videoRef = useRef<HTMLVideoElement | null>(null);
+//   const [muted, setMuted] = useState(true);
+
+//   const toggleMute = () => {
+//     if (videoRef.current) {
+//       videoRef.current.muted = !videoRef.current.muted;
+//       setMuted(videoRef.current.muted);
+//     }
+//   };
+
+//   return (
+//     <div
+//       style={{
+//         width: "clamp(340px, 52vw, 550px)",
+//         aspectRatio: "3.2 / 2",
+//         // aspectRatio: "16 / 9",
+//         background: "linear-gradient(145deg, #1c1c1c, #2a2a2a, #111)",
+//         borderRadius: 28,
+//         padding: 14,
+//         boxShadow: `
+//           0 0 0 1px rgba(0,0,0,0.08),
+//           0 40px 80px rgba(0,0,0,0.18),
+//           0 8px 30px rgba(0,0,0,0.1),
+//           inset 0 1px 0 rgba(255,255,255,0.08)
+//         `,
+//         position: "relative",
+//         overflow: "hidden",
+//       }}
+//     >
+//       <div
+//         style={{
+//           width: "100%",
+//           height: "100%",
+//           borderRadius: 16,
+//           overflow: "hidden",
+//           background: "#000",
+//           position: "relative",
+//         }}
+//       >
+//         <video
+//           ref={videoRef}
+//           src={src}
+//           autoPlay
+//           loop
+//           muted
+//           playsInline
+//           style={{
+//             position: "absolute",
+//             inset: 0,
+//             width: "100%",
+//             height: "100%",
+//             objectFit: "cover",
+//             objectPosition: "center center",
+//             borderRadius: "16px",
+//             display: "block",
+//           }}
+//         />
+//         <button
+//           onClick={toggleMute}
+//           style={{
+//             position: "absolute",
+//             bottom: 12,
+//             left: 12,
+//             zIndex: 4,
+//             width: 28,
+//             height: 28,
+//             borderRadius: "50%",
+//             background: "rgba(0,0,0,0.65)",
+//             border: "1px solid rgba(255,255,255,0.15)",
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "center",
+//             cursor: "pointer",
+//             fontSize: 10,
+//             color: "white",
+//           }}
+//         >
+//           {muted ? "🔇" : "🔊"}
+//         </button>
+//       </div>
+//       <div
+//         style={{
+//           position: "absolute",
+//           bottom: 6,
+//           left: "50%",
+//           transform: "translateX(-50%)",
+//           width: 60,
+//           height: 3,
+//           borderRadius: 2,
+//           background: "rgba(255,255,255,0.25)",
+//         }}
+//       />
+//     </div>
+//   );
+// }
+
+// const SLIDES_CONFIG = [
+//   null,
+//   // Slide 2 — dashnew.png + mobile.png side by side
+//   {
+//     headline: [
+//       { text: "Transforming Your Journey with AI and ML: " },
+//       { text: "A Seamless Technological Enhancement", yellow: true },
+//     ],
+//     body: "Streamline HR with a cloud-based solution that saves time and costs—so you can focus on core operations.",
+//     cta: "Explore AI Features",
+//     visual: <DualImageVisual />,
+//   },
+//   // Slide 3 — video
+//   {
+//     headline: [
+//       { text: "Zero Errors. Zero Delays. " },
+//       { text: "Payroll On Autopilot.", yellow: true },
+//     ],
+//     body: "Fully automated payroll processing with tax compliance, multi-currency support, and one-click disbursement across Pakistan and beyond.",
+//     cta: "See Payroll Module",
+//     visual: <VideoMockup src="/images/0411(4).mp4" />,
+//   },
+//   // Slide 4 — video
+//   {
+//     headline: [
+//       { text: "Hire Smarter, Hire Faster " },
+//       { text: "with AI Matching.", yellow: true },
+//     ],
+//     body: "Let AI rank and shortlist your best-fit candidates automatically. Reduce time-to-hire by 60% with Decibel's intelligent recruitment engine.",
+//     cta: "Explore Talent Module",
+//     visual: <VideoMockup src="/images/0411(4).mp4" />,
+//   },
+//   // Slide 5 — dashnew.png + mobile.png side by side (same layout)
+//   {
+//     headline: [
+//       { text: "Every Employee. Every Journey. " },
+//       { text: "One Platform.", yellow: true },
+//     ],
+//     body: "From goals to recognition, leaves to performance — give your people a workspace they'll love logging into every single day.",
+//     cta: "Explore EX Module",
+//     visual: <DualImageVisual />,
+//   },
+// ];
+
+// export default function HeroSection() {
+//   const [current, setCurrent] = useState(0);
+//   const [prev, setPrev] = useState<number | null>(null);
+//   const [fading, setFading] = useState(false);
+
+//   const goTo = useCallback(
+//     (next: number) => {
+//       if (fading) return;
+//       setFading(true);
+//       setPrev(current);
+//       setCurrent(next);
+//       setTimeout(() => {
+//         setPrev(null);
+//         setFading(false);
+//       }, FADE_DURATION);
+//     },
+//     [current, fading]
+//   );
+
+//   useEffect(() => {
+//     const t = setInterval(
+//       () => goTo((current + 1) % TOTAL_SLIDES),
+//       SLIDE_DURATION
+//     );
+//     return () => clearInterval(t);
+//   }, [current, goTo]);
+
+//   const renderSlide = (idx: number) => {
+//     if (idx === 0) return <Slide1 />;
+//     const cfg = SLIDES_CONFIG[idx];
+//     if (!cfg) return <Slide1 />;
+//     return (
+//       <DarkSlide
+//         headline={cfg.headline}
+//         body={cfg.body}
+//         cta={cfg.cta}
+//         visual={cfg.visual}
+//       />
+//     );
+//   };
+
+//   return (
+//     <>
+//       <section
+//         style={{
+//           position: "relative",
+//           width: "100%",
+//           height: "112vh",
+//           minHeight: 700,
+//           overflow: "hidden",
+//         }}
+//       >
+//         {prev !== null && (
+//           <div
+//             key={`exit-${prev}`}
+//             className="hero-slide-out"
+//             style={{ position: "absolute", inset: 0, zIndex: 1 }}
+//           >
+//             {renderSlide(prev)}
+//           </div>
+//         )}
+//         <div
+//           key={`enter-${current}`}
+//           className="hero-slide-in"
+//           style={{ position: "absolute", inset: 0, zIndex: 2 }}
+//         >
+//           {renderSlide(current)}
+//         </div>
+
+//         {/* Dot Navigation */}
+//         <div
+//           style={{
+//             position: "absolute",
+//             bottom: 28,
+//             left: "50%",
+//             transform: "translateX(-50%)",
+//             zIndex: 200,
+//             display: "flex",
+//             gap: 8,
+//             alignItems: "center",
+//           }}
+//         >
+//           {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
+//             <button
+//               key={i}
+//               onClick={() => goTo(i)}
+//               aria-label={`Go to slide ${i + 1}`}
+//               style={{
+//                 width: current === i ? 28 : 8,
+//                 height: 8,
+//                 borderRadius: 4,
+//                 padding: 0,
+//                 border: "none",
+//                 cursor: "pointer",
+//                 background:
+//                   current === i ? "#22c55e" : "rgba(255,255,255,0.25)",
+//                 transition: "all 0.35s ease",
+//               }}
+//             />
+//           ))}
+//         </div>
+//       </section>
+//     </>
+//   );
+// }
+
 "use client";
-
 import { useEffect, useState, useCallback, useRef } from "react";
-
 const SLIDE_DURATION = 15000;
 const FADE_DURATION = 850;
 const TOTAL_SLIDES = 5;
-
 const DARK_BG = "linear-gradient(135deg, #154d46 0%, #13674f 25%, #22b840 60%, #82e8a6 100%)";
 const BRAND_BG = "linear-gradient(135deg, #154d46 0%, #13674f 25%, #22b840 60%, #82e8a6 100%)";
-
 function Slide1() {
   return (
     <section
@@ -382,20 +1132,20 @@ function Slide1() {
       <div className="relative z-10 mx-auto max-w-5xl px-6 pt-10 text-center md:pt-12">
         <h1
           className="text-3xl font-bold text-white md:text-5xl"
-          style={{ fontFamily: "'Syne', sans-serif" }}
+          style={{ fontFamily: "Nunito Sans, sans-serif" }}
         >
           The Largest Enterprise Cloud in Pakistan Powering Human Connections with AI
         </h1>
         <p
           className="mt-0.5 text-base text-white md:text-lg"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
+          style={{ fontFamily: "Nunito Sans, sans-serif" }}
         >
           Decibel simplifies your HR digital transformation across all processes, from onboarding to retirement
         </p>
       </div>
       <div className="relative z-0 -mt-20 flex-1 w-full overflow-hidden md:-mt-24">
         <img
-          src="/images/hero trial.png"
+          src="/images/Artboard 3.png"
           alt="Hero Section"
           style={{
             width: "100%",
@@ -410,8 +1160,8 @@ function Slide1() {
     </section>
   );
 }
-
-function DarkSlide({ headline, body, cta, visual }: any) {  return (
+function DarkSlide({ headline, body, cta, visual }: any) {
+  return (
     <div
       style={{
         width: "100%",
@@ -435,39 +1185,48 @@ function DarkSlide({ headline, body, cta, visual }: any) {  return (
       >
         {/* LEFT — TEXT */}
         <div style={{ flex: "0 0 38%" }}>
-          <h2 style={{
-            fontFamily: "'Syne', sans-serif",
-            fontSize: "clamp(1.8rem, 3.2vw, 2.8rem)",
-            fontWeight: 800,
-            color: "#f5fff8",
-            lineHeight: 1.25,
-            marginBottom: 10,
-            textTransform: "uppercase",
-          }}>
-            {headline.map((part, i) =>
-              part.yellow
-                ? <span key={i} style={{ color: "#4cf29a" }}>{part.text}</span>
-                : <span key={i}>{part.text}</span>
+          <h2
+            style={{
+              fontFamily: "Nunito Sans, sans-serif",
+              fontSize: "clamp(2.2rem, 3.8vw, 3.4rem)",
+              fontWeight: 800,
+              color: "#f5fff8",
+              lineHeight: 1.25,
+              marginBottom: 10,
+              textTransform: "uppercase",
+            }}
+          >
+            {headline.map((part: any, i: number) =>
+              part.yellow ? (
+                <span key={i} style={{ color: "#4cf29a" }}>
+                  {part.text}
+                </span>
+              ) : (
+                <span key={i}>{part.text}</span>
+              )
             )}
           </h2>
-
-          <p style={{
-            fontSize: 16,
-            color: "rgba(205, 221, 211, 0.72)",
-            lineHeight: 1.65,
-            margin: "14px 0 28px 0",
-            maxWidth: 420,
-          }}>
+          <p
+            style={{
+              fontSize: 16,
+              color: "rgba(205, 221, 211, 0.72)",
+              lineHeight: 1.65,
+              margin: "14px 0 28px 0",
+              maxWidth: 420,
+            }}
+          >
             {body}
           </p>
         </div>
-
-        {/* RIGHT — MOCKUP */}
-        <div style={{
-          flex: "0 0 55%",
-          display: "flex",
-          justifyContent: "center",
-        }}>
+        {/* RIGHT — VISUAL */}
+        <div
+          style={{
+            flex: "0 0 55%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
+        >
           {visual}
         </div>
       </div>
@@ -475,110 +1234,236 @@ function DarkSlide({ headline, body, cta, visual }: any) {  return (
   );
 }
 
-function ScreenFrame({ children }) {
+/* ─── Slide 2 & 5: dashnew.png + mobile.png ─── */
+function DualImageVisual() {
   return (
-    <div style={{
-      width: "clamp(420px, 62vw, 680px)",
-      aspectRatio: "4 / 3",
-      background: "linear-gradient(145deg, #1c1c1c, #2a2a2a, #111)",
-      borderRadius: 28,
-      padding: 14,
-      boxShadow: `
-        0 0 0 1px rgba(0,0,0,0.08),
-        0 40px 80px rgba(0,0,0,0.18),
-        0 8px 30px rgba(0,0,0,0.1),
-        inset 0 1px 0 rgba(255,255,255,0.08)
-      `,
-      position: "relative",
-      overflow: "hidden",
-      zIndex: 1,
-    }}>
-      <div style={{
-        width: "100%",
-        height: "100%",
-        borderRadius: 16,
-        overflow: "hidden",
-        background: "#000",
+    <div
+      style={{
         position: "relative",
-        display: "flex",          // ✅ added
-        alignItems: "center",     // ✅ added
-        justifyContent: "center", // ✅ added
-      }}>
-        {children}
+        width: "100%",
+        height: "clamp(380px, 50vh, 600px)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingRight: "12%",
+        boxSizing: "border-box",
+      }}
+    >
+      {/* Desktop Frame */}
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          borderRadius: "22px",
+          overflow: "hidden",
+          zIndex: 1,
+          boxShadow: "0 30px 70px rgba(0,0,0,0.5)",
+        }}
+      >
+        <img
+          src="/images/dashnew.png"
+          alt="Dashboard"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "top left",
+          }}
+        />
       </div>
-      <div style={{
-        position: "absolute",
-        bottom: 6,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 60,
-        height: 3,
-        borderRadius: 2,
-        background: "rgba(255,255,255,0.25)",
-      }} />
+      {/* Mobile Frame */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-5%",
+          right: "0%",
+          width: "24%",
+          height: "88%",
+          borderRadius: "28px",
+          overflow: "hidden",
+          zIndex: 3,
+          boxShadow: "0 30px 60px rgba(0,0,0,0.65)",
+        }}
+      >
+        <img
+          src="/images/mobile.png"
+          alt="Mobile"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "top center",
+          }}
+        />
+      </div>
     </div>
   );
 }
 
-function VideoMockup({ src }) {
-  const videoRef = useRef(null);
-  const [muted, setMuted] = useState(true);
+/* ─── Slide 4: talent.png + mobile.png ─── */
+function TalentImageVisual() {
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "clamp(380px, 50vh, 600px)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingRight: "12%",
+        boxSizing: "border-box",
+      }}
+    >
+      {/* Desktop Frame — talent.png */}
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          borderRadius: "22px",
+          overflow: "hidden",
+          zIndex: 1,
+          boxShadow: "0 30px 70px rgba(0,0,0,0.5)",
+        }}
+      >
+        <img
+          src="/images/talent.png"
+          alt="Talent Dashboard"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "top left",
+          }}
+        />
+      </div>
+      {/* Mobile Frame — mobile.png */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-5%",
+          right: "0%",
+          width: "24%",
+          height: "88%",
+          borderRadius: "28px",
+          overflow: "hidden",
+          zIndex: 3,
+          boxShadow: "0 30px 60px rgba(0,0,0,0.65)",
+        }}
+      >
+        <img
+          src="/images/mobile.png"
+          alt="Mobile"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "top center",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
+/* ─── Video Mockup (Slide 3 only) ─── */
+function VideoMockup({ src }: any) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [muted, setMuted] = useState(true);
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
       setMuted(videoRef.current.muted);
     }
   };
-
   return (
-    <ScreenFrame>
-      <video
-        ref={videoRef}
-        src={src}
-        autoPlay
-        loop
-        muted
-        playsInline
+    <div
+      style={{
+        width: "clamp(340px, 52vw, 550px)",
+        aspectRatio: "3.2 / 2",
+        background: "linear-gradient(145deg, #1c1c1c, #2a2a2a, #111)",
+        borderRadius: 28,
+        padding: 14,
+        boxShadow: `
+          0 0 0 1px rgba(0,0,0,0.08),
+          0 40px 80px rgba(0,0,0,0.18),
+          0 8px 30px rgba(0,0,0,0.1),
+          inset 0 1px 0 rgba(255,255,255,0.08)
+        `,
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
         style={{
-          position: "absolute",
-          inset: 0,
           width: "100%",
           height: "100%",
-          objectFit: "cover",          // ✅ cover
-          objectPosition: "center center",
-          borderRadius: "16px",        // ✅ added
-          display: "block",            // ✅ added
-        }}
-      />
-      <button
-        onClick={toggleMute}
-        style={{
-          position: "absolute",
-          bottom: 12,
-          left: 12,
-          zIndex: 4,
-          width: 28,
-          height: 28,
-          borderRadius: "50%",
-          background: "rgba(0,0,0,0.65)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          fontSize: 10,
-          color: "white",
+          borderRadius: 16,
+          overflow: "hidden",
+          background: "#000",
+          position: "relative",
         }}
       >
-        {muted ? "🔇" : "🔊"}
-      </button>
-    </ScreenFrame>
+        <video
+          ref={videoRef}
+          src={src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center center",
+            borderRadius: "16px",
+            display: "block",
+          }}
+        />
+        <button
+          onClick={toggleMute}
+          style={{
+            position: "absolute",
+            bottom: 12,
+            left: 12,
+            zIndex: 4,
+            width: 28,
+            height: 28,
+            borderRadius: "50%",
+            background: "rgba(0,0,0,0.65)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            fontSize: 10,
+            color: "white",
+          }}
+        >
+          {muted ? "🔇" : "🔊"}
+        </button>
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          bottom: 6,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 60,
+          height: 3,
+          borderRadius: 2,
+          background: "rgba(255,255,255,0.25)",
+        }}
+      />
+    </div>
   );
 }
 
 const SLIDES_CONFIG = [
   null,
+  // Slide 2 — dashnew.png + mobile.png
   {
     headline: [
       { text: "Transforming Your Journey with AI and ML: " },
@@ -586,8 +1471,9 @@ const SLIDES_CONFIG = [
     ],
     body: "Streamline HR with a cloud-based solution that saves time and costs—so you can focus on core operations.",
     cta: "Explore AI Features",
-    visual: <VideoMockup src="/video/0330(3).mp4" />,
+    visual: <DualImageVisual />,
   },
+  // Slide 3 — video only
   {
     headline: [
       { text: "Zero Errors. Zero Delays. " },
@@ -595,8 +1481,9 @@ const SLIDES_CONFIG = [
     ],
     body: "Fully automated payroll processing with tax compliance, multi-currency support, and one-click disbursement across Pakistan and beyond.",
     cta: "See Payroll Module",
-    visual: <VideoMockup src="/video/slide 1.mp4" />,
+    visual: <VideoMockup src="/images/0411(4).mp4" />,
   },
+  // Slide 4 — talent.png + mobile.png (video hata diya) ✅
   {
     headline: [
       { text: "Hire Smarter, Hire Faster " },
@@ -604,8 +1491,9 @@ const SLIDES_CONFIG = [
     ],
     body: "Let AI rank and shortlist your best-fit candidates automatically. Reduce time-to-hire by 60% with Decibel's intelligent recruitment engine.",
     cta: "Explore Talent Module",
-    visual: <VideoMockup src="/video/slide 1.mp4" />,
+    visual: <TalentImageVisual />,
   },
+  // Slide 5 — dashnew.png + mobile.png
   {
     headline: [
       { text: "Every Employee. Every Journey. " },
@@ -613,75 +1501,101 @@ const SLIDES_CONFIG = [
     ],
     body: "From goals to recognition, leaves to performance — give your people a workspace they'll love logging into every single day.",
     cta: "Explore EX Module",
-    visual: <VideoMockup src="/video/slide 1.mp4" />,
+    visual: <DualImageVisual />,
   },
 ];
 
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
-  const [prev, setPrev] = useState(null);
+  const [prev, setPrev] = useState<number | null>(null);
   const [fading, setFading] = useState(false);
-
-  const goTo = useCallback((next) => {
-    if (fading) return;
-    setFading(true);
-    setPrev(current);
-    setCurrent(next);
-    setTimeout(() => { setPrev(null); setFading(false); }, FADE_DURATION);
-  }, [current, fading]);
-
+  const goTo = useCallback(
+    (next: number) => {
+      if (fading) return;
+      setFading(true);
+      setPrev(current);
+      setCurrent(next);
+      setTimeout(() => {
+        setPrev(null);
+        setFading(false);
+      }, FADE_DURATION);
+    },
+    [current, fading]
+  );
   useEffect(() => {
-    const t = setInterval(() => goTo((current + 1) % TOTAL_SLIDES), SLIDE_DURATION);
+    const t = setInterval(
+      () => goTo((current + 1) % TOTAL_SLIDES),
+      SLIDE_DURATION
+    );
     return () => clearInterval(t);
   }, [current, goTo]);
-
-  const renderSlide = (idx) => {
+  const renderSlide = (idx: number) => {
     if (idx === 0) return <Slide1 />;
     const cfg = SLIDES_CONFIG[idx];
-    return <DarkSlide headline={cfg.headline} body={cfg.body} cta={cfg.cta} visual={cfg.visual} />;
+    if (!cfg) return <Slide1 />;
+    return (
+      <DarkSlide
+        headline={cfg.headline}
+        body={cfg.body}
+        cta={cfg.cta}
+        visual={cfg.visual}
+      />
+    );
   };
-
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap');
-        @keyframes heroSlideIn {
-          from { opacity: 1; transform: translate3d(30%, 0, 0); }
-          to   { opacity: 1; transform: translate3d(0, 0, 0); }
-        }
-        @keyframes heroSlideOut {
-          from { opacity: 1; transform: translate3d(0, 0, 0); }
-          to   { opacity: 1; transform: translate3d(-30%, 0, 0); }
-        }
-        .hero-slide-in, .hero-slide-out { backface-visibility: hidden; will-change: transform; }
-        .hero-slide-in  { animation: heroSlideIn  ${FADE_DURATION}ms cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
-        .hero-slide-out { animation: heroSlideOut ${FADE_DURATION}ms cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
-      `}</style>
-
-      <section style={{ position: "relative", width: "100%", height: "112vh", minHeight: 700, overflow: "hidden" }}>
+      <section
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "112vh",
+          minHeight: 700,
+          overflow: "hidden",
+        }}
+      >
         {prev !== null && (
-          <div key={`exit-${prev}`} className="hero-slide-out" style={{ position: "absolute", inset: 0, zIndex: 1 }}>
+          <div
+            key={`exit-${prev}`}
+            className="hero-slide-out"
+            style={{ position: "absolute", inset: 0, zIndex: 1 }}
+          >
             {renderSlide(prev)}
           </div>
         )}
-        <div key={`enter-${current}`} className="hero-slide-in" style={{ position: "absolute", inset: 0, zIndex: 2 }}>
+        <div
+          key={`enter-${current}`}
+          className="hero-slide-in"
+          style={{ position: "absolute", inset: 0, zIndex: 2 }}
+        >
           {renderSlide(current)}
         </div>
-
-        {/* dot nav */}
-        <div style={{
-          position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)",
-          zIndex: 200, display: "flex", gap: 8, alignItems: "center",
-        }}>
+        {/* Dot Navigation */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 28,
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 200,
+            display: "flex",
+            gap: 8,
+            alignItems: "center",
+          }}
+        >
           {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
               style={{
-                width: current === i ? 28 : 8, height: 8, borderRadius: 4,
-                padding: 0, border: "none", cursor: "pointer",
-                background: current === i ? "#22c55e" : "rgba(255,255,255,0.25)",
+                width: current === i ? 28 : 8,
+                height: 8,
+                borderRadius: 4,
+                padding: 0,
+                border: "none",
+                cursor: "pointer",
+                background:
+                  current === i ? "#22c55e" : "rgba(255,255,255,0.25)",
                 transition: "all 0.35s ease",
               }}
             />

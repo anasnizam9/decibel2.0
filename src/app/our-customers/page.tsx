@@ -94,7 +94,7 @@ export default function OurCustomersPage() {
 
       {/* HEADING */}
       <section className="bg-white pt-12">
-        <h2 className="text-center text-2xl md:text-3xl font-bold text-green-600">
+        <h2 className="text-center text-3xl md:text-5xl font-bold text-green-600">
           300+ Companies Digitally Empowered, Are You?
         </h2>
       </section>

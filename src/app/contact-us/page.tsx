@@ -208,7 +208,7 @@ const contactCards = [
 
 export default function ContactUsPage() {
   return (
-    <main style={{ fontFamily: "DM Sans, sans-serif" }}>
+    <main style={{ fontFamily: "Nunito Sans, sans-serif" }}>
       <Navbar />
 
       {/* ── HERO ── */}
@@ -227,7 +227,7 @@ export default function ContactUsPage() {
             <div className="text-white">
               <h1
                 className="text-4xl font-extrabold leading-tight md:text-6xl"
-                style={{ fontFamily: "Syne, sans-serif" }}
+                style={{ fontFamily: "Nunito Sans, sans-serif" }}
               >
                 Contact Us
               </h1>
@@ -255,7 +255,7 @@ export default function ContactUsPage() {
             <div className="rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
               <p
                 className="text-xs font-bold uppercase tracking-[0.18em] text-white/60"
-                style={{ fontFamily: "Syne, sans-serif" }}
+                style={{ fontFamily: "Nunito Sans, sans-serif" }}
               >
                 Quick Contact
               </p>
@@ -295,7 +295,7 @@ export default function ContactUsPage() {
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1D9E75]">Get In Touch</p>
             <h2
               className="mt-2 text-3xl font-extrabold text-gray-800 md:text-4xl"
-              style={{ fontFamily: "Syne, sans-serif" }}
+              style={{ fontFamily: "Nunito Sans, sans-serif" }}
             >
               Our Team Is Ready To Assist You
             </h2>
@@ -316,7 +316,7 @@ export default function ContactUsPage() {
                 {/* decorative circles */}
                 <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/8" />
                 <div className="pointer-events-none absolute -bottom-4 -right-2 h-16 w-16 rounded-full bg-white/6" />
-                <h3 className="relative text-2xl font-extrabold text-white md:text-3xl" style={{ fontFamily: "Syne, sans-serif" }}>
+                <h3 className="relative text-2xl font-extrabold text-white md:text-3xl" style={{ fontFamily: "Nunito Sans, sans-serif" }}>
                   Tell Us About Your Requirement
                 </h3>
                 <p className="relative mt-1.5 text-[13px] text-white/80">
@@ -407,7 +407,7 @@ export default function ContactUsPage() {
                       </div>
                       <h4
                         className="mt-3 text-[15px] font-extrabold text-gray-800"
-                        style={{ fontFamily: "Syne, sans-serif" }}
+                        style={{ fontFamily: "Nunito Sans, sans-serif" }}
                       >
                         {card.title}
                       </h4>
@@ -445,7 +445,7 @@ export default function ContactUsPage() {
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#1D9E75]">Our Office</p>
                   <h4
                     className="mt-1 text-lg font-extrabold text-gray-800"
-                    style={{ fontFamily: "Syne, sans-serif" }}
+                    style={{ fontFamily: "Nunito Sans, sans-serif" }}
                   >
                     Fortune Centre, Karachi
                   </h4>

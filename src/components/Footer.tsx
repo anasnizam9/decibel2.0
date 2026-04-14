@@ -36,17 +36,26 @@ const offices = [
   {
     flagCode: 'ae',
     country: 'UAE',
-    addr: 'Office 205, 2nd Floor, Robot Park Tower, Al Khan, Sharjah.',
+    locations: [
+      {
+        label: 'Sharjah Office',
+        addr: 'Office 205, 2nd Floor, Robot Park Tower, Al Khan, Sharjah.',
+      },
+    ],
   },
   {
     flagCode: 'pk',
-    country: 'Karachi Office',
-    addr: 'Suite 405, 4th Floor, Fortune Center, PECHS Block 6, Shahra-e-Faisal, Karachi, 75400.',
-  },
-  {
-    flagCode: 'pk',
-    country: 'Lahore Office',
-    addr: '3rd Floor, Vouge Towers, 15 C/2, Gulberg 3, M.M. Alam Road, Lahore, 54000.',
+    country: 'Pakistan',
+    locations: [
+      {
+        label: 'Karachi Office',
+        addr: 'Suite 405, 4th Floor, Fortune Center, PECHS Block 6, Shahra-e-Faisal, Karachi, 75400.',
+      },
+      {
+        label: 'Lahore Office',
+        addr: '3rd Floor, Vouge Towers, 15 C/2, Gulberg 3, M.M. Alam Road, Lahore, 54000.',
+      },
+    ],
   },
 ];
 
@@ -136,7 +145,7 @@ export default function Footer() {
         {/* Offices */}
         <div className="border-t border-white/10 pt-8 mb-8">
           <h4 className="text-white font-bold text-xl mb-6">Our Offices</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10">
             {offices.map((o) => (
               <div key={o.country}>
                 <img
@@ -144,8 +153,15 @@ export default function Footer() {
                   alt={o.country}
                   className="mb-3 rounded-sm shadow-sm"
                 />
-                <p className="text-white font-semibold text-sm mb-1">{o.country}</p>
-                <p className="text-white/75 text-sm leading-relaxed mb-2">{o.addr}</p>
+                <p className="text-white font-semibold text-sm mb-3">{o.country}</p>
+                <div className="space-y-5">
+                  {o.locations.map((location) => (
+                    <div key={location.label}>
+                      <p className="text-white/90 text-sm font-medium mb-1">{location.label}</p>
+                      <p className="text-white/75 text-sm leading-relaxed">{location.addr}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

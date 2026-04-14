@@ -29,261 +29,23 @@ export default function Leap2024Page() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-          --green-dark:    #154d46;
-          --green-bright:  #22b840;
-          --green-light:   #82e8a6;
-          --hero-gradient: linear-gradient(135deg, #154d46 0%, #13674f 25%, #22b840 60%, #82e8a6 100%);
-          --white:         #ffffff;
-          --bg-white:      #f8fafb;
-        }
-
-        body { font-family: 'DM Sans', sans-serif; background: var(--bg-white); }
-
-        /* ── HERO ── */
-        .hero {
-          background: var(--hero-gradient);
-          padding: 64px 20px 84px;
-          text-align: center;
-        }
-
-        .hero h1 {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(1.8rem, 4vw, 2.8rem);
-          font-weight: 700;
-          color: var(--white);
-          margin-bottom: 48px;
-        }
-
-        /* ── COUNTDOWN ── */
-        .countdown {
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-          flex-wrap: wrap;
-          margin-bottom: 44px;
-        }
-
-        .count-box {
-          background: rgba(255, 255, 255, 0.13);
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          border-radius: 10px;
-          width: 140px;
-          padding: 22px 16px 16px;
-          text-align: center;
-        }
-
-        .count-box .num {
-          font-family: 'Sora', sans-serif;
-          font-size: 3rem;
-          font-weight: 700;
-          color: var(--white);
-          line-height: 1;
-        }
-
-        .count-box .label {
-          font-size: 0.82rem;
-          color: rgba(255, 255, 255, 0.78);
-          margin-top: 7px;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-        }
-
-        /* ── BUTTONS ── */
-        .btn-outline {
-          display: inline-block;
-          padding: 13px 40px;
-          background: transparent;
-          border: 2px solid var(--white);
-          color: var(--white);
-          font-family: 'Sora', sans-serif;
-          font-size: 0.92rem;
-          font-weight: 600;
-          border-radius: 6px;
-          cursor: pointer;
-          text-decoration: none;
-          transition: background 0.22s, color 0.22s;
-        }
-        .btn-outline:hover { background: var(--white); color: var(--green-dark); }
-
-        .btn-solid {
-          display: inline-block;
-          padding: 13px 40px;
-          background: var(--green-bright);
-          border: 2px solid var(--green-bright);
-          color: var(--white);
-          font-family: 'Sora', sans-serif;
-          font-size: 0.92rem;
-          font-weight: 600;
-          border-radius: 6px;
-          cursor: pointer;
-          text-decoration: none;
-          transition: opacity 0.2s;
-        }
-        .btn-solid:hover { opacity: 0.85; }
-
-        /* ── INFO BAR ── */
-        .info-bar {
-          background: #fff;
-          border-bottom: 1px solid #e4ede9;
-          padding: 26px 40px;
-          display: flex;
-          justify-content: center;
-          gap: clamp(24px, 5vw, 80px);
-          flex-wrap: wrap;
-        }
-
-        .info-item { display: flex; align-items: center; gap: 12px; }
-
-        .info-item .icon {
-          width: 38px;
-          height: 38px;
-          background: var(--green-bright);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-        .info-item .icon svg { width: 18px; height: 18px; fill: white; }
-
-        .ititle { font-weight: 600; color: #1a2e28; font-size: 0.95rem; }
-        .isub   { font-size: 0.8rem; color: #7a9e94; }
-
-        /* ── ABOUT ── */
-        .about-wrap { background: #fff; padding: 64px 20px; }
-        .about-inner { max-width: 740px; margin: 0 auto; text-align: center; }
-        .about-inner h2 {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(1.4rem, 3vw, 2rem);
-          color: var(--green-bright);
-          margin-bottom: 18px;
-          font-weight: 700;
-        }
-        .about-inner p { color: #4a6660; line-height: 1.8; font-size: 0.94rem; }
-
-        /* ── VIDEO ── */
-        .video-section {
-          background: var(--bg-white);
-          padding: 60px 20px;
-          text-align: center;
-        }
-        .video-section h3 {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(1rem, 2.2vw, 1.4rem);
-          color: var(--green-bright);
-          font-weight: 600;
-          max-width: 700px;
-          margin: 0 auto 30px;
-        }
-        .video-wrapper {
-          max-width: 860px;
-          margin: 0 auto;
-          border-radius: 14px;
-          overflow: hidden;
-          box-shadow: 0 16px 50px rgba(21, 77, 70, 0.14);
-          background: #0e1f1c;
-          aspect-ratio: 16/9;
-        }
-        .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        /* ── SPLIT ── */
-        .split {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          padding: 60px clamp(24px, 5vw, 80px);
-          gap: 60px;
-          background: #fff;
-        }
-        .split.reversed {
-          background: var(--bg-white);
-        }
-        @media (max-width: 768px) {
-          .split { flex-direction: column; padding: 40px 20px; gap: 30px; }
-          .split.reversed { flex-direction: column; }
-          .count-box { width: 120px; }
-          .count-box .num { font-size: 2.4rem; }
-        }
-
-        .text-col {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-        .img-col {
-          flex-shrink: 0;
-          width: 420px;
-          height: 480px;
-          border-radius: 12px;
-          overflow: hidden;
-          box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-        }
-        @media (max-width: 900px) {
-          .img-col { width: 300px; height: 360px; }
-        }
-        @media (max-width: 768px) {
-          .img-col { width: 100%; height: 280px; }
-        }
-        .img-col img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-
-        .eyebrow {
-          font-family: 'Sora', sans-serif;
-          font-size: 3rem;
-          font-weight: 800;
-          color: rgba(34, 184, 64, 0.10);
-          line-height: 1;
-          letter-spacing: 0.04em;
-          margin-bottom: -6px;
-        }
-        .sec-heading {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-          font-weight: 700;
-          color: var(--green-bright);
-          margin-bottom: 16px;
-          line-height: 1.2;
-        }
-        .sec-body {
-          color: #4a6660;
-          line-height: 1.78;
-          font-size: 0.92rem;
-          margin-bottom: 28px;
-        }
-
-
-      `}</style>
+      <div className="leap-2024-page">
 
       {/* ── NAVBAR ── */}
       <Navbar />
 
-      {/* ── HERO ── */}
-      <section className="hero">
-        <h1>Decibel HRMS at Leap 2024</h1>
-
-        <div className="countdown">
-          {[
-            { num: timeLeft.days,    label: "Days"    },
-            { num: timeLeft.hours,   label: "Hours"   },
-            { num: timeLeft.minutes, label: "Minutes" },
-            { num: timeLeft.seconds, label: "Seconds" },
-          ].map(({ num, label }) => (
-            <div className="count-box" key={label}>
-              <div className="num">{String(num).padStart(2, "0")}</div>
-              <div className="label">{label}</div>
-            </div>
-          ))}
-        </div>
-
-        <a href="#" className="btn-outline">Meet us at Leap 2024</a>
-      </section>
-
+     {/* ── HERO / ABOUT COMBINED ── */}
+<div className="about-wrap" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+  <div className="about-inner">
+    <h2>Decibel HRMS at Leap 2024</h2>
+    <p>
+      Decibel HRMS is excited to join the vibrant community at LEAP 2024, the region&apos;s biggest
+      technology event in Riyadh this March. We will explore the future of technology and artificial
+      intelligence, the evolving field of HR and much more. Join us as we explore human-led,
+      tech-powered innovations made real for our region.
+    </p>
+  </div>
+</div>
       {/* ── INFO BAR ── */}
       <div className="info-bar">
         <div className="info-item">
@@ -327,18 +89,7 @@ export default function Leap2024Page() {
         </div>
       </div>
 
-      {/* ── ABOUT ── */}
-      <div className="about-wrap">
-        <div className="about-inner">
-          <h2>Decibel HRMS at Leap 2024</h2>
-          <p>
-            Decibel HRMS is excited to join the vibrant community at LEAP 2024, the region&apos;s biggest
-            technology event in Riyadh this March. We will explore the future of technology and artificial
-            intelligence, the evolving field of HR and much more. Join us as we explore human-led,
-            tech-powered innovations made real for our region.
-          </p>
-        </div>
-      </div>
+    
 
       {/* ── VIDEO ── */}
       <section className="video-section">
@@ -346,7 +97,7 @@ export default function Leap2024Page() {
         <div className="video-wrapper">
           {/* Apni video /public/videos/ceo-message.mp4 mein rakh do */}
           <video controls>
-            <source src="/public/videos/leap.mp4" type="video/mp4" />
+            <source src="/images/leap2024.mp4" type="video/mp4" />
           </video>
         </div>
       </section>
@@ -387,6 +138,7 @@ export default function Leap2024Page() {
 
       {/* ── FOOTER ── */}
       <Footer />
+      </div>
     </>
   );
 }

@@ -143,13 +143,13 @@ function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
       <div className="mb-5 flex items-center justify-center">{feature.icon}</div>
       <p
         className="text-[15px] font-semibold leading-snug text-gray-700"
-        style={{ fontFamily: "DM Sans, sans-serif" }}
+        style={{ fontFamily: "Nunito Sans, sans-serif" }}
       >
         {feature.title}
       </p>
       <p
         className="mt-2 text-[13px] leading-relaxed text-gray-500"
-        style={{ fontFamily: "DM Sans, sans-serif" }}
+        style={{ fontFamily: "Nunito Sans, sans-serif" }}
       >
         {feature.desc}
       </p>
@@ -200,7 +200,7 @@ export default function ValueAdditionsPage() {
         <div className="mx-auto max-w-6xl px-6">
           <h2
             className="mb-12 text-center text-3xl font-bold md:text-4xl"
-            style={{ color: "#1D9E75", fontFamily: "Syne, sans-serif" }}
+            style={{ color: "#1D9E75", fontFamily: "Nunito Sans, sans-serif" }}
           >
             Solution Hosting Plans
           </h2>

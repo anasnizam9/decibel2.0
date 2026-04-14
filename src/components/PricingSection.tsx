@@ -77,7 +77,7 @@ export default function PricingSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const toggleExpand = (idx) => {
+  const toggleExpand = (idx: number) => {
     setExpanded((prev) => {
       const next = [...prev];
       next[idx] = !next[idx];
