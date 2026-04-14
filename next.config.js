@@ -1,15 +1,14 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const nextConfig = {
-  output: isProd ? 'export' : undefined,
-  basePath: isProd ? '/decibeltesting' : '',
+  basePath,
   images: {
     unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'flagcdn.com',
+        protocol: "https",
+        hostname: "flagcdn.com",
       },
     ],
   },
