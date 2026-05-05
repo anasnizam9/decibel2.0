@@ -10,31 +10,6 @@
       "static/chunks/main-app.js",
       "static/css/css-src_app_globals_css.css",
       "static/chunks/app/layout.js"
-    ],
-    "/succession-planning/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/succession-planning/page.js"
-    ],
-    "/End-of-service/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/End-of-service/page.js"
-    ],
-    "/employee/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/employee/page.js"
-    ],
-    "/pulse-survey/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/pulse-survey/page.js"
-    ],
-    "/performance-management/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/performance-management/page.js"
     ]
   }
 }
