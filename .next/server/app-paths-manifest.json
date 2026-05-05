@@ -1,4 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/pulse-survey/page": "app/pulse-survey/page.js",
+  "/End-of-service/page": "app/End-of-service/page.js",
+  "/employee/page": "app/employee/page.js",
+  "/performance-management/page": "app/performance-management/page.js"
 }

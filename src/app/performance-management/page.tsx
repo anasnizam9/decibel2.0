@@ -1,6 +1,7 @@
-"use client";
+﻿"use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -9,25 +10,25 @@ const successionEssentialFeatures = [
     title: "Empowering Employee Autonomy",
     description:
       "Facilitating greater employee autonomy within the organization.",
-    icon: "🎯",
+    icon: "ðŸŽ¯",
   },
   {
     title: "Equitable Administrative Actions",
     description:
       "Ensuring fairness in all administrative actions.",
-    icon: "📋",
+    icon: "ðŸ“‹",
   },
   {
     title: "Efficient End-to-End Performance Cycle",
     description:
       "Implementing streamlined processes throughout the entire performance cycle.",
-    icon: "📈",
+    icon: "ðŸ“ˆ",
   },
    {
     title: "Alignment of Objectives with Strategic Plans",
     description:
-      "Harmonizing individual objectives with the company’s strategic and operational plans.",
-    icon: "📈",
+      "Harmonizing individual objectives with the companyâ€™s strategic and operational plans.",
+    icon: "ðŸ“ˆ",
   },
 ];
 
@@ -63,7 +64,7 @@ export default function SuccessionPlanningPage() {
     <main className="bg-white">
       <Navbar />
 
-      {/* ── Hero ── */}
+      {/* â”€â”€ Hero â”€â”€ */}
       <section className="hero-bg overflow-hidden pt-12 pb-20 md:pt-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
@@ -72,7 +73,7 @@ export default function SuccessionPlanningPage() {
                 Performance Management
               </h1>
               <p className="mt-5 max-w-[620px] text-base leading-relaxed md:text-lg">
-                We are committed to offering you the Best performance and recruiting management system and Payroll & Attendance Software. A transformation that delivers results awaits you. Decibel is highly focused on ensuring ‘’one-page approach’’ that enhances the overall efficiency and performance of the teams.
+                We are committed to offering you the Best performance and recruiting management system and Payroll & Attendance Software. A transformation that delivers results awaits you. Decibel is highly focused on ensuring â€˜â€™one-page approachâ€™â€™ that enhances the overall efficiency and performance of the teams.
               </p>
               <Link
                 href="#"
@@ -92,7 +93,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
-      {/* ── Desktop Preview Banner ── */}
+      {/* â”€â”€ Desktop Preview Banner â”€â”€ */}
       <section className="relative -mt-10 bg-gradient-to-b from-transparent to-white pb-10 md:-mt-16 md:pb-14">
         <div className="mx-auto max-w-4xl px-6">
           <div className="mx-auto max-w-3xl overflow-hidden rounded-xl border-4 border-green-500 bg-white shadow-[0_10px_28px_rgba(0,0,0,0.15)]">
@@ -105,7 +106,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
-      {/* ── Essential Features ── */}
+      {/* â”€â”€ Essential Features â”€â”€ */}
       <section className="bg-white py-14 md:py-20">
         <div className="mx-auto max-w-5xl px-6">
           <div className="mb-12 text-center">
@@ -157,7 +158,7 @@ export default function SuccessionPlanningPage() {
                           {item.title}
                         </span>
                       </div>
-                      <span className="text-xs">▼</span>
+                      <span className="text-xs">â–¼</span>
                     </button>
                     {isOpen && (
                       <div className="border-t px-5 py-4 text-sm text-gray-600 md:text-base">
@@ -181,7 +182,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
-      {/* ── Download App ── */}
+      {/* â”€â”€ Download App â”€â”€ */}
       <section className="bg-white py-10 md:py-14">
         <div className="mx-auto max-w-5xl px-6">
           <div className="grid items-center gap-5 md:grid-cols-2 md:gap-8">
@@ -208,6 +209,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
+      <TestimonialsSection />
       <Footer />
     </main>
   );

@@ -557,19 +557,364 @@
 //   );
 // }
 
+// "use client";
+// import { useEffect, useRef, useState } from "react";
+
+// const COUNTRIES = [
+//   { id: "us",  label: "United States",  cx: 175, cy: 150, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/us.png" },
+//   { id: "uk",  label: "United Kingdom", cx: 430, cy: 110, type: "hq",     labelPos: "above", flag: "https://flagcdn.com/w40/gb.png" },
+//   { id: "lb",  label: "Lebanon",        cx: 530, cy: 135, type: "hq",     labelPos: "above", flag: "https://flagcdn.com/w40/lb.png" },
+//   { id: "bh",  label: "Bahrain",        cx: 555, cy: 158, type: "hq",     labelPos: "right", flag: "https://flagcdn.com/w40/bh.png" },
+//   { id: "pk",  label: "Pakistan",       cx: 612, cy: 188, type: "hq",     labelPos: "right", flag: "https://flagcdn.com/w40/pk.png" },
+//   { id: "uae", label: "UAE",            cx: 558, cy: 215, type: "hq",     labelPos: "below", flag: "https://flagcdn.com/w40/ae.png" },
+//   { id: "mo",  label: "Morocco",        cx: 430, cy: 208, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/ma.png" },
+//   { id: "eg",  label: "Egypt",          cx: 490, cy: 218, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/eg.png" },
+//   { id: "sa",  label: "Saudi Arabia",   cx: 520, cy: 228, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/sa.png" },
+// ] as const;
+
+// type CountryId = (typeof COUNTRIES)[number]["id"];
+
+// const CONNECTIONS: [CountryId, CountryId][] = [
+//   ["us", "uk"], ["uk", "lb"], ["uk", "mo"], ["lb", "bh"],
+//   ["bh", "uae"], ["uae", "pk"], ["sa", "uae"], ["mo", "eg"], ["eg", "sa"],
+// ];
+
+// const ARC_LIFT = 50;
+// const PIN_R = 11; // circle radius inside pin
+
+// interface Packet { id: number; fromId: string; toId: string; t: number; speed: number; }
+// let uid = 0;
+
+// function getC(id: string) { return COUNTRIES.find(c => c.id === id)!; }
+
+// function qBez(ax: number, ay: number, bx: number, by: number, t: number) {
+//   const mx = (ax + bx) / 2, my = Math.min(ay, by) - ARC_LIFT;
+//   return {
+//     x: (1 - t) * (1 - t) * ax + 2 * (1 - t) * t * mx + t * t * bx,
+//     y: (1 - t) * (1 - t) * ay + 2 * (1 - t) * t * my + t * t * by,
+//   };
+// }
+
+// function pathD(aId: string, bId: string) {
+//   const a = getC(aId), b = getC(bId);
+//   // connections start from circle center (not tip)
+//   const aCy = a.cy - PIN_R - 4;
+//   const bCy = b.cy - PIN_R - 4;
+//   return `M${a.cx},${aCy} Q${(a.cx + b.cx) / 2},${Math.min(aCy, bCy) - ARC_LIFT} ${b.cx},${bCy}`;
+// }
+
+// function labelProps(c: (typeof COUNTRIES)[number]) {
+//   if (c.labelPos === "above") return { x: c.cx,      y: c.cy - 40, anchor: "middle" as const };
+//   if (c.labelPos === "below") return { x: c.cx,      y: c.cy + 26, anchor: "middle" as const };
+//   return                             { x: c.cx + 18, y: c.cy + 4,  anchor: "start"  as const };
+// }
+
+// // Clean map pin: circle on top, smooth teardrop tip at bottom
+// // pinCy = center of the circle part
+// function pinPath(cx: number, pinCy: number, r: number): string {
+//   const tipY = pinCy + r + r * 0.9; // tip length proportional to radius
+//   // tangent width at bottom of circle where pin body starts
+//   const tw = r * 0.38;
+//   return [
+//     `M ${cx - tw} ${pinCy + r * 0.85}`,
+//     `Q ${cx - tw * 0.5} ${(pinCy + r * 0.85 + tipY) / 2} ${cx} ${tipY}`,
+//     `Q ${cx + tw * 0.5} ${(pinCy + r * 0.85 + tipY) / 2} ${cx + tw} ${pinCy + r * 0.85}`,
+//     `A ${r} ${r} 0 1 0 ${cx - tw} ${pinCy + r * 0.85}`,
+//     `Z`,
+//   ].join(" ");
+// }
+
+// function CountryPin({
+//   cx, cy, flagUrl, isHq, dur,
+// }: {
+//   cx: number; cy: number; flagUrl: string; isHq: boolean; dur: string;
+// }) {
+//   const r = PIN_R;
+//   const pinCy = cy - r - 4; // circle center, shifted up so tip points at cy
+//   const clipId = `cf-${cx}-${cy}`;
+
+//   return (
+//     <g>
+//       <defs>
+//         <clipPath id={clipId}>
+//           <circle cx={cx} cy={pinCy} r={r} />
+//         </clipPath>
+//       </defs>
+
+//       {/* ✅ Pulse wave — CIRCLE shape (not pin shape) */}
+//       <circle
+//         cx={cx} cy={pinCy} r={r + 2}
+//         fill="none"
+//         stroke="rgba(255,255,255,0.6)"
+//         strokeWidth="1.2"
+//         className="pulse-ring"
+//         style={{ animationDuration: `${dur}s` }}
+//       />
+
+//       {/* Pin body — clean teardrop, no black gaps */}
+//       <path
+//         d={pinPath(cx, pinCy, r)}
+//         // fill="rgba(10,25,15,0.82)"
+//         fill="none"
+//         // fill="rgba(255,255,255,0.08)"
+//         stroke="#ffffff"
+//         strokeWidth="1.5"
+//         strokeLinejoin="round"
+//       />
+
+//       {/* Flag image clipped to circle */}
+//       <image
+//         href={flagUrl}
+//         x={cx - r} y={pinCy - r}
+//         width={r * 2} height={r * 2}
+//         clipPath={`url(#${clipId})`}
+//         preserveAspectRatio="xMidYMid slice"
+//       />
+
+//       {/* Circle border on top of flag */}
+//       <circle
+//         cx={cx} cy={pinCy} r={r}
+//         fill="none"
+//         stroke="#ffffff"
+//         strokeWidth="1.8"
+//         filter={isHq ? "url(#gRed)" : "url(#gBlue)"}
+//       />
+//     </g>
+//   );
+// }
+
+// const PULSE_DURS = Object.fromEntries(
+//   COUNTRIES.map((c, index) => [c.id, (2.6 + (index % 4) * 0.25).toFixed(1)])
+// );
+
+// const STATS_DATA = [
+//   { value: "16+",        label: "Years of Service" },
+//   { value: "09",         label: "Countries" },
+//   { value: "300,000+",   label: "Active Employees" },
+//   { value: "300+",       label: "Clients" },
+//   { value: "45+",        label: "Clients Over 1,000 Employees" },
+//   { value: "3,000,000+", label: "Pay Slips Per Annum" },
+// ];
+
+// export default function GlobalNetworkMap() {
+//   const rafRef    = useRef<number>(0);
+//   const lastSpawn = useRef<number>(0);
+//   const [packets, setPackets] = useState<Packet[]>([]);
+
+//   useEffect(() => {
+//     const loop = (ts: number) => {
+//       if (ts - lastSpawn.current > 260) {
+//         lastSpawn.current = ts;
+//         const conn    = CONNECTIONS[Math.floor(Math.random() * CONNECTIONS.length)];
+//         const reverse = Math.random() > 0.5;
+//         setPackets(prev => [
+//           ...prev.slice(-80),
+//           {
+//             id:     uid++,
+//             fromId: reverse ? conn[1] : conn[0],
+//             toId:   reverse ? conn[0] : conn[1],
+//             t:      0,
+//             speed:  0.004 + Math.random() * 0.003,
+//           },
+//         ]);
+//       }
+//       setPackets(prev =>
+//         prev.map(p => ({ ...p, t: p.t + p.speed })).filter(p => p.t < 1)
+//       );
+//       rafRef.current = requestAnimationFrame(loop);
+//     };
+//     rafRef.current = requestAnimationFrame(loop);
+//     return () => cancelAnimationFrame(rafRef.current);
+//   }, []);
+
+//   return (
+//     <div style={{ width: "100%", fontFamily: "'Syne','DM Sans',sans-serif" }}>
+//       <div style={{
+//         background: "linear-gradient(135deg,#154d46 0%,#13674f 25%,#22b840 60%,#82e8a6 100%)",
+//         position: "relative",
+//         overflow: "hidden",
+//       }}>
+//         {/* Scan line */}
+//         <div style={{
+//           position: "absolute", left: 0, right: 0, height: 2,
+//           background: "linear-gradient(transparent,rgba(255,255,255,.07),transparent)",
+//           animation: "scan 5s linear infinite",
+//           pointerEvents: "none", zIndex: 2,
+//         }} />
+
+//         {/* Dot grid */}
+//         <svg style={{
+//           position: "absolute", top: 0, left: 0,
+//           width: "100%", height: "100%",
+//           opacity: .05, pointerEvents: "none", zIndex: 1,
+//         }}>
+//           <defs>
+//             <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+//               <circle cx="1" cy="1" r="1" fill="#fff" />
+//             </pattern>
+//           </defs>
+//           <rect width="100%" height="100%" fill="url(#dots)" />
+//         </svg>
+
+//         {/* Heading */}
+//         <div style={{
+//           position: "relative", zIndex: 6,
+//           textAlign: "center", padding: "28px 36px 32px",
+//         }}>
+//           <div style={{
+//             fontSize: 10, fontWeight: 700, letterSpacing: "2px",
+//             textTransform: "uppercase", color: "rgba(255,255,255,0.55)", marginBottom: 8,
+//           }}>
+//             Breaking Barriers, Embracing Success With A Human Resource Management System
+//           </div>
+//           <div style={{
+//             fontSize: "clamp(18px,2.8vw,32px)", fontWeight: 800, color: "#ffffff",
+//             lineHeight: 1.15, letterSpacing: "1px", textTransform: "uppercase",
+//             textShadow: "0 2px 16px rgba(0,0,0,0.3)",
+//           }}>
+//             Global Presence
+//           </div>
+//         </div>
+
+//         {/* Map SVG */}
+//         <div style={{ position: "relative", zIndex: 5 }}>
+//           <svg
+//             viewBox="60 -20 820 420"
+//             width="100%"
+//             xmlns="http://www.w3.org/2000/svg"
+//             style={{ display: "block" }}
+//           >
+//             <defs>
+//               <filter id="gRed">
+//                 <feGaussianBlur stdDeviation="3" result="b" />
+//                 <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+//               </filter>
+//               <filter id="gBlue">
+//                 <feGaussianBlur stdDeviation="2.5" result="b" />
+//                 <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+//               </filter>
+//               <filter id="gPkt">
+//                 <feGaussianBlur stdDeviation="1.8" result="b" />
+//                 <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+//               </filter>
+//             </defs>
+
+//             {/* World map */}
+//             <image
+//               href="/images/world-map.png"
+//               x="0" y="0" width="900" height="440"
+//               preserveAspectRatio="xMidYMid slice"
+//               opacity={0.18}
+//             />
+
+//             {/* Arc connections */}
+//             {CONNECTIONS.map(([aId, bId]) => (
+//               <path
+//                 key={`${aId}-${bId}`}
+//                 d={pathD(aId, bId)}
+//                 fill="none"
+//                 stroke="rgba(130,232,166,0.28)"
+//                 strokeWidth="1"
+//                 strokeDasharray="5,5"
+//               />
+//             ))}
+
+//             {/* Animated packets */}
+//             {packets.map(p => {
+//               const a   = getC(p.fromId), b = getC(p.toId);
+//               const aCy = a.cy - PIN_R - 4;
+//               const bCy = b.cy - PIN_R - 4;
+//               const pos = qBez(a.cx, aCy, b.cx, bCy, p.t);
+//               const opacity =
+//                 p.t < 0.08 ? p.t / 0.08 :
+//                 p.t > 0.92 ? (1 - p.t) / 0.08 : 1;
+//               return (
+//                 <circle
+//                   key={p.id}
+//                   cx={pos.x} cy={pos.y} r="4"
+//                   fill="rgba(255,255,255,0.95)"
+//                   opacity={opacity}
+//                   filter="url(#gPkt)"
+//                 />
+//               );
+//             })}
+
+//             {/* Country pins + labels */}
+//             {COUNTRIES.map(c => {
+//               const lbl = labelProps(c);
+//               return (
+//                 <g key={c.id}>
+//                   <CountryPin
+//                     cx={c.cx} cy={c.cy}
+//                     flagUrl={c.flag}
+//                     isHq={c.type === "hq"}
+//                     dur={PULSE_DURS[c.id]}
+//                   />
+//                   <text
+//                     x={lbl.x} y={lbl.y}
+//                     textAnchor={lbl.anchor}
+//                     fontSize="12"
+//                     fontWeight="700"
+//                     fill="#ffffff"
+//                     fontFamily="'Syne',sans-serif"
+//                   >
+//                     {c.label}
+//                   </text>
+//                 </g>
+//               );
+//             })}
+//           </svg>
+//         </div>
+
+//         {/* Stats bar */}
+//         <div style={{ position: "relative", zIndex: 6, padding: "18px 24px 22px" }}>
+//           <div style={{
+//             background: "#ffffff", borderRadius: 14, padding: "4px 0",
+//             boxShadow: "0 4px 24px rgba(0,0,0,0.15)",
+//           }}>
+//             <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 0 }}>
+//               {STATS_DATA.map((stat, i) => (
+//                 <div key={stat.label} style={{
+//                   textAlign: "center", padding: "14px 8px",
+//                   borderRight: i < STATS_DATA.length - 1 ? "1.5px solid #e5e7eb" : "none",
+//                 }}>
+//                   <div style={{
+//                     fontSize: "clamp(16px,2vw,26px)", fontWeight: 800,
+//                     color: "#111111", fontFamily: "'Syne',sans-serif",
+//                     lineHeight: 1, letterSpacing: "-0.5px",
+//                   }}>
+//                     {stat.value}
+//                   </div>
+//                   <div style={{
+//                     fontSize: "clamp(7px,0.85vw,10px)", color: "#555555",
+//                     marginTop: 5, fontWeight: 600, textTransform: "uppercase",
+//                     letterSpacing: "0.5px", lineHeight: 1.4,
+//                   }}>
+//                     {stat.label}
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
 "use client";
 import { useEffect, useRef, useState } from "react";
 
 const COUNTRIES = [
-  { id: "us",  label: "United States",  cx: 175, cy: 150, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/us.png" },
-  { id: "uk",  label: "United Kingdom", cx: 430, cy: 110, type: "hq",     labelPos: "above", flag: "https://flagcdn.com/w40/gb.png" },
-  { id: "lb",  label: "Lebanon",        cx: 530, cy: 135, type: "hq",     labelPos: "above", flag: "https://flagcdn.com/w40/lb.png" },
-  { id: "bh",  label: "Bahrain",        cx: 555, cy: 158, type: "hq",     labelPos: "right", flag: "https://flagcdn.com/w40/bh.png" },
-  { id: "pk",  label: "Pakistan",       cx: 612, cy: 188, type: "hq",     labelPos: "right", flag: "https://flagcdn.com/w40/pk.png" },
-  { id: "uae", label: "UAE",            cx: 558, cy: 215, type: "hq",     labelPos: "below", flag: "https://flagcdn.com/w40/ae.png" },
-  { id: "mo",  label: "Morocco",        cx: 430, cy: 208, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/ma.png" },
-  { id: "eg",  label: "Egypt",          cx: 490, cy: 218, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/eg.png" },
-  { id: "sa",  label: "Saudi Arabia",   cx: 520, cy: 228, type: "branch", labelPos: "below", flag: "https://flagcdn.com/w40/sa.png" },
+  { id: "us",  label: "United States",  cx: 175, cy: 150, type: "branch", labelPos: "below", flag: "/images/us.jpg" },
+  { id: "uk",  label: "United Kingdom", cx: 430, cy: 110, type: "hq",     labelPos: "above", flag: "/images/uk.jpg" },
+  { id: "lb",  label: "Lebanon",        cx: 530, cy: 135, type: "hq",     labelPos: "above", flag: "/images/leb.png" },
+  { id: "bh",  label: "Bahrain",        cx: 555, cy: 158, type: "hq",     labelPos: "right", flag: "/images/bah.png" },
+  { id: "pk",  label: "Pakistan",       cx: 612, cy: 188, type: "hq",     labelPos: "right", flag: "/images/pak.png" },
+  { id: "uae", label: "UAE",            cx: 558, cy: 215, type: "hq",     labelPos: "below", flag: "/images/uae.png" },
+  { id: "mo",  label: "Morocco",        cx: 430, cy: 208, type: "branch", labelPos: "below", flag: "/images/mor.jpg" },
+  { id: "eg",  label: "Egypt",          cx: 490, cy: 218, type: "branch", labelPos: "below", flag: "/images/eg.png" },
+  { id: "sa",  label: "Saudi Arabia",   cx: 520, cy: 228, type: "branch", labelPos: "below", flag: "/images/ksa.png" },
 ] as const;
 
 type CountryId = (typeof COUNTRIES)[number]["id"];
@@ -580,7 +925,7 @@ const CONNECTIONS: [CountryId, CountryId][] = [
 ];
 
 const ARC_LIFT = 50;
-const PIN_R = 11; // circle radius inside pin
+const PIN_R = 11;
 
 interface Packet { id: number; fromId: string; toId: string; t: number; speed: number; }
 let uid = 0;
@@ -597,23 +942,19 @@ function qBez(ax: number, ay: number, bx: number, by: number, t: number) {
 
 function pathD(aId: string, bId: string) {
   const a = getC(aId), b = getC(bId);
-  // connections start from circle center (not tip)
   const aCy = a.cy - PIN_R - 4;
   const bCy = b.cy - PIN_R - 4;
   return `M${a.cx},${aCy} Q${(a.cx + b.cx) / 2},${Math.min(aCy, bCy) - ARC_LIFT} ${b.cx},${bCy}`;
 }
 
-function labelProps(c: (typeof COUNTRIES)[number]) {
-  if (c.labelPos === "above") return { x: c.cx,      y: c.cy - 40, anchor: "middle" as const };
-  if (c.labelPos === "below") return { x: c.cx,      y: c.cy + 26, anchor: "middle" as const };
-  return                             { x: c.cx + 18, y: c.cy + 4,  anchor: "start"  as const };
+function tooltipProps(c: (typeof COUNTRIES)[number]) {
+  if (c.labelPos === "above") return { x: c.cx, y: c.cy - PIN_R - 22, anchor: "middle" as const };
+  if (c.labelPos === "below") return { x: c.cx, y: c.cy + 16,         anchor: "middle" as const };
+  return                             { x: c.cx + PIN_R + 4, y: c.cy - PIN_R + 2, anchor: "start" as const };
 }
 
-// Clean map pin: circle on top, smooth teardrop tip at bottom
-// pinCy = center of the circle part
 function pinPath(cx: number, pinCy: number, r: number): string {
-  const tipY = pinCy + r + r * 0.9; // tip length proportional to radius
-  // tangent width at bottom of circle where pin body starts
+  const tipY = pinCy + r + r * 0.9;
   const tw = r * 0.38;
   return [
     `M ${cx - tw} ${pinCy + r * 0.85}`,
@@ -625,12 +966,12 @@ function pinPath(cx: number, pinCy: number, r: number): string {
 }
 
 function CountryPin({
-  cx, cy, flagUrl, isHq, dur,
+  cx, cy, flagUrl, isHq, dur, hovered,
 }: {
-  cx: number; cy: number; flagUrl: string; isHq: boolean; dur: string;
+  cx: number; cy: number; flagUrl: string; isHq: boolean; dur: string; hovered: boolean;
 }) {
   const r = PIN_R;
-  const pinCy = cy - r - 4; // circle center, shifted up so tip points at cy
+  const pinCy = cy - r - 4;
   const clipId = `cf-${cx}-${cy}`;
 
   return (
@@ -641,44 +982,93 @@ function CountryPin({
         </clipPath>
       </defs>
 
-      {/* ✅ Pulse wave — CIRCLE shape (not pin shape) */}
+      {isHq && (
+        <circle
+          cx={cx} cy={pinCy} r={r + 3}
+          fill="none"
+          stroke="rgba(255,255,255,0.22)"
+          strokeWidth="5"
+          style={{ filter: "blur(3px)" }}
+        />
+      )}
+
       <circle
         cx={cx} cy={pinCy} r={r + 2}
         fill="none"
-        stroke="rgba(255,255,255,0.6)"
+        stroke={hovered ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.55)"}
         strokeWidth="1.2"
         className="pulse-ring"
         style={{ animationDuration: `${dur}s` }}
       />
 
-      {/* Pin body — clean teardrop, no black gaps */}
       <path
         d={pinPath(cx, pinCy, r)}
-        // fill="rgba(10,25,15,0.82)"
-        fill="none"
-        // fill="rgba(255,255,255,0.08)"
+        fill="rgba(0,0,0,0.18)"
         stroke="#ffffff"
         strokeWidth="1.5"
         strokeLinejoin="round"
       />
 
-      {/* Flag image clipped to circle */}
       <image
         href={flagUrl}
         x={cx - r} y={pinCy - r}
         width={r * 2} height={r * 2}
         clipPath={`url(#${clipId})`}
         preserveAspectRatio="xMidYMid slice"
+        style={{ imageRendering: "crisp-edges" }}
       />
 
-      {/* Circle border on top of flag */}
       <circle
         cx={cx} cy={pinCy} r={r}
         fill="none"
         stroke="#ffffff"
-        strokeWidth="1.8"
-        filter={isHq ? "url(#gRed)" : "url(#gBlue)"}
+        strokeWidth={hovered ? "2.2" : "1.8"}
       />
+    </g>
+  );
+}
+
+function HoverTooltip({ c, visible }: { c: (typeof COUNTRIES)[number]; visible: boolean }) {
+  if (!visible) return null;
+  const tp = tooltipProps(c);
+  const label = c.label;
+  const charWidth = 7.5;
+  const padding = 10;
+  const boxW = label.length * charWidth + padding * 2;
+  const boxH = 22;
+
+  // Box ki x position
+  let boxX = tp.x;
+  if (tp.anchor === "middle") boxX = tp.x - boxW / 2;
+  if (tp.anchor === "start")  boxX = tp.x;
+
+  // ✅ FIX: text hamesha box ke exact center par
+  const textX = boxX + boxW / 2;
+  const textY = tp.y - boxH + 4 + boxH / 2;
+
+  return (
+    <g style={{ pointerEvents: "none" }}>
+      <rect
+        x={boxX} y={tp.y - boxH + 4}
+        width={boxW} height={boxH}
+        rx="5" ry="5"
+        fill="rgba(10,30,20,0.82)"
+        stroke="rgba(255,255,255,0.25)"
+        strokeWidth="1"
+      />
+      <text
+        x={textX}
+        y={textY}
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontSize="10"
+        fontWeight="700"
+        fill="#ffffff"
+        fontFamily="'Syne',sans-serif"
+        letterSpacing="0.3"
+      >
+        {label}
+      </text>
     </g>
   );
 }
@@ -699,7 +1089,8 @@ const STATS_DATA = [
 export default function GlobalNetworkMap() {
   const rafRef    = useRef<number>(0);
   const lastSpawn = useRef<number>(0);
-  const [packets, setPackets] = useState<Packet[]>([]);
+  const [packets, setPackets]     = useState<Packet[]>([]);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
     const loop = (ts: number) => {
@@ -729,6 +1120,23 @@ export default function GlobalNetworkMap() {
 
   return (
     <div style={{ width: "100%", fontFamily: "'Syne','DM Sans',sans-serif" }}>
+      <style>{`
+        @keyframes scan {
+          0%   { top: -4px; }
+          100% { top: 100%; }
+        }
+        @keyframes pulse-ring {
+          0%   { transform: scale(1);   opacity: 0.7; }
+          70%  { transform: scale(1.9); opacity: 0; }
+          100% { transform: scale(1.9); opacity: 0; }
+        }
+        .pulse-ring {
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: pulse-ring 2.6s ease-out infinite;
+        }
+      `}</style>
+
       <div style={{
         background: "linear-gradient(135deg,#154d46 0%,#13674f 25%,#22b840 60%,#82e8a6 100%)",
         position: "relative",
@@ -785,21 +1193,12 @@ export default function GlobalNetworkMap() {
             style={{ display: "block" }}
           >
             <defs>
-              <filter id="gRed">
-                <feGaussianBlur stdDeviation="3" result="b" />
-                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-              </filter>
-              <filter id="gBlue">
-                <feGaussianBlur stdDeviation="2.5" result="b" />
-                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-              </filter>
-              <filter id="gPkt">
+              <filter id="gPkt" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="1.8" result="b" />
                 <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
               </filter>
             </defs>
 
-            {/* World map */}
             <image
               href="/images/world-map.png"
               x="0" y="0" width="900" height="440"
@@ -807,7 +1206,6 @@ export default function GlobalNetworkMap() {
               opacity={0.18}
             />
 
-            {/* Arc connections */}
             {CONNECTIONS.map(([aId, bId]) => (
               <path
                 key={`${aId}-${bId}`}
@@ -819,7 +1217,6 @@ export default function GlobalNetworkMap() {
               />
             ))}
 
-            {/* Animated packets */}
             {packets.map(p => {
               const a   = getC(p.fromId), b = getC(p.toId);
               const aCy = a.cy - PIN_R - 4;
@@ -839,9 +1236,14 @@ export default function GlobalNetworkMap() {
               );
             })}
 
-            {/* Country pins + labels */}
             {COUNTRIES.map(c => {
-              const lbl = labelProps(c);
+              const pinCy = c.cy - PIN_R - 4;
+              const hovered = hoveredId === c.id;
+              const hitX = c.cx - PIN_R - 4;
+              const hitY = pinCy - PIN_R - 2;
+              const hitW = (PIN_R + 4) * 2;
+              const hitH = PIN_R * 2 + PIN_R * 0.9 + 10;
+
               return (
                 <g key={c.id}>
                   <CountryPin
@@ -849,17 +1251,17 @@ export default function GlobalNetworkMap() {
                     flagUrl={c.flag}
                     isHq={c.type === "hq"}
                     dur={PULSE_DURS[c.id]}
+                    hovered={hovered}
                   />
-                  <text
-                    x={lbl.x} y={lbl.y}
-                    textAnchor={lbl.anchor}
-                    fontSize="12"
-                    fontWeight="700"
-                    fill="#ffffff"
-                    fontFamily="'Syne',sans-serif"
-                  >
-                    {c.label}
-                  </text>
+                  <rect
+                    x={hitX} y={hitY}
+                    width={hitW} height={hitH}
+                    fill="transparent"
+                    style={{ cursor: "pointer" }}
+                    onMouseEnter={() => setHoveredId(c.id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                  />
+                  <HoverTooltip c={c} visible={hovered} />
                 </g>
               );
             })}

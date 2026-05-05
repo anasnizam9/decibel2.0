@@ -34,7 +34,7 @@ const ModulesSection = () => {
       mobileImg:  '/images/mobile.png',
     },
     {
-      name: 'Zel- AI Agent',
+      name: 'Zel - AI Agent',
       description: 'Empowering organizations with a smart AI agent that connects people, policies, and performance through real-time insights.',
       modules: [
         { left: 'Employee',  right: '' },

@@ -1,4 +1,4 @@
-import PayrollPage from "./payroll";
+﻿import PayrollPage from "./payroll";
 
 export default function Page() {
 	return <PayrollPage />;

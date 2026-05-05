@@ -59,7 +59,7 @@ const talentManagementDropdown: MenuItem[] = [
   { label: "Succession Planning", href: "/succession-planning" },
   { label: "Performance Management", href: "/performance-management" },
   { label: "Onboarding", href: "/on-boarding" },
-  { label: "Learning, Planning and Administration", href: "/Learning" },
+  { label: "Learning Administration", href: "/Learning" },
   { label: "Pulse Survey", href: "/pulse-survey" },
   { label: "360 Review", href: "360-reviews" },
 ];
@@ -81,7 +81,7 @@ const companyDropdown: MenuItem[] = [
 
 const zelDropdown: MenuItem[] = [
   { label: "Zel Intro", href: "/zel-intro" },
-  { label: "Zel AI Agent", href: "/zel-ai-agent" },
+  { label: "Zel - AI Agent", href: "/zel-ai-agent" },
 ];
 
 const zibelDropdown: MenuItem[] = [
@@ -92,7 +92,7 @@ const zibelDropdown: MenuItem[] = [
 const productsTopLevelDropdown: MenuItem[] = [
   { label: "Enabling HR Processes", href: "#" },
   { label: "Talent Management Processes", href: "#" },
-  { label: "Zel AI Agent", href: "#" },
+  { label: "Zel - AI Agent", href: "#" },
   { label: "Zibel", href: "#" },
 ];
 
@@ -478,11 +478,8 @@ export default function Navbar() {
                       <div className="relative grid grid-cols-1 gap-2 overflow-visible">
                         <div className="rounded-xl border border-gray-200 bg-[#fcfffd] p-2">
                           {productsTopLevelDropdown.map((item, index) => {
-                            let submenuType: "enabling" | "talent" | "zel" | "zibel" = "enabling";
-                            if (item.label === "Enabling HR Processes") submenuType = "enabling";
-                            else if (item.label === "Talent Management Processes") submenuType = "talent";
-                            else if (item.label === "Zel AI Agent") submenuType = "zel";
-                            else if (item.label === "Zibel") submenuType = "zibel";
+                            const submenuTypeByIndex = ["enabling", "talent", "zel", "zibel"] as const;
+                            const submenuType = submenuTypeByIndex[index] ?? "enabling";
                             const isActiveRow = activeProductsSubmenu === submenuType;
                             return (
                               <button

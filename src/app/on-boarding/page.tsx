@@ -1,6 +1,7 @@
-"use client";
+﻿"use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -9,19 +10,19 @@ const successionEssentialFeatures = [
     title: "Comprehensive Onboarding Support",
     description:
       "Providing assistance with office introductions, training, access to essential tools, goal setting, and facilitating meetings with IT and HR.",
-    icon: "🎯",
+    icon: "ðŸŽ¯",
   },
   {
     title: "Talent Retention and Attraction",
     description:
       "Fostering an environment that retains and attracts top talent within the organization.",
-    icon: "📋",
+    icon: "ðŸ“‹",
   },
   {
     title: "Promoting Unity and Maximizing Potential",
     description:
       "Cultivating a sense of togetherness among new hires and empowering them to realize their full potential in their roles.",
-    icon: "📈",
+    icon: "ðŸ“ˆ",
   },
 ];
 
@@ -57,7 +58,7 @@ export default function SuccessionPlanningPage() {
     <main className="bg-white">
       <Navbar />
 
-      {/* ── Hero ── */}
+      {/* â”€â”€ Hero â”€â”€ */}
       <section className="hero-bg overflow-hidden pt-12 pb-20 md:pt-16 md:pb-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
@@ -66,7 +67,7 @@ export default function SuccessionPlanningPage() {
                 Onboarding
               </h1>
               <p className="mt-5 max-w-[620px] text-base leading-relaxed md:text-lg">
-               Onboarding is a critical step in ensuring your organization’s long-term success. With Decibel, you can enhance employee engagement, ensure compliance, accelerate time-to-productivity, and get a seamless transition.
+               Onboarding is a critical step in ensuring your organizationâ€™s long-term success. With Decibel, you can enhance employee engagement, ensure compliance, accelerate time-to-productivity, and get a seamless transition.
 
 
               </p>
@@ -88,7 +89,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
-      {/* ── Desktop Preview Banner ── */}
+      {/* â”€â”€ Desktop Preview Banner â”€â”€ */}
       <section className="relative -mt-10 bg-gradient-to-b from-transparent to-white pb-10 md:-mt-16 md:pb-14">
         <div className="mx-auto max-w-4xl px-6">
           <div className="mx-auto max-w-3xl overflow-hidden rounded-xl border-4 border-green-500 bg-white shadow-[0_10px_28px_rgba(0,0,0,0.15)]">
@@ -101,7 +102,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
-      {/* ── Essential Features ── */}
+      {/* â”€â”€ Essential Features â”€â”€ */}
       <section className="bg-white py-14 md:py-20">
         <div className="mx-auto max-w-5xl px-6">
           <div className="mb-12 text-center">
@@ -153,7 +154,7 @@ export default function SuccessionPlanningPage() {
                           {item.title}
                         </span>
                       </div>
-                      <span className="text-xs">▼</span>
+                      <span className="text-xs">â–¼</span>
                     </button>
                     {isOpen && (
                       <div className="border-t px-5 py-4 text-sm text-gray-600 md:text-base">
@@ -177,7 +178,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
-      {/* ── Download App ── */}
+      {/* â”€â”€ Download App â”€â”€ */}
       <section className="bg-white py-10 md:py-14">
         <div className="mx-auto max-w-5xl px-6">
           <div className="grid items-center gap-5 md:grid-cols-2 md:gap-8">
@@ -204,6 +205,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
+      <TestimonialsSection />
       <Footer />
     </main>
   );

@@ -10,7 +10,7 @@ export default function CardCarousel3D() {
       id: 1,
       title: 'Multi-currency',
       icon: '💱',
-      bgColor: 'linear-gradient(to right, #1a7f7e, #06b6d4)',
+      bgColor: '#159542',
       description: 'Support for 150+ currencies with real-time conversion rates and automatic currency handling across all transactions.',
       details: ['Real-time rates', 'Auto conversion', '150+ currencies', 'Instant settlement']
     },
@@ -18,7 +18,7 @@ export default function CardCarousel3D() {
       id: 2,
       title: 'Multi Language',
       icon: '🌐',
-      bgColor: 'linear-gradient(to right, #64748b, #475569)',
+      bgColor: '#1bc057',
       description: 'Interface available in 45+ languages with localized content and regional compliance built-in.',
       details: ['45+ languages', 'Native speakers', 'Auto-detect', 'RTL support']
     },
@@ -26,7 +26,7 @@ export default function CardCarousel3D() {
       id: 3,
       title: '100% Localized',
       icon: '📍',
-      bgColor: 'linear-gradient(to right, #16a34a, #0d9488)',
+      bgColor: '#159542',
       description: 'Complete localization for every market including local compliance, regulations, and cultural preferences.',
       details: ['Local compliance', 'Regional laws', 'Cultural fit', 'Tax optimized']
     },
@@ -34,7 +34,7 @@ export default function CardCarousel3D() {
       id: 4,
       title: 'Enterprise Cloud',
       icon: '☁️',
-      bgColor: 'linear-gradient(to right, #475569, #1e293b)',
+      bgColor: '#1bc057',
       description: 'Scalable cloud infrastructure with 99.99% uptime SLA and enterprise-grade security protocols.',
       details: ['99.99% uptime', 'Auto-scaling', 'Global CDN', 'Redundancy']
     },
@@ -42,7 +42,7 @@ export default function CardCarousel3D() {
       id: 5,
       title: '24/7 Accessible',
       icon: '⏰',
-      bgColor: 'linear-gradient(to right, #d97706, #eab308)',
+      bgColor: '#159542',
       description: 'Round-the-clock access to your data and systems with our dedicated support team available anytime.',
       details: ['24/7 support', 'Real-time help', 'No downtime', 'Priority queue']
     },
@@ -50,7 +50,7 @@ export default function CardCarousel3D() {
       id: 6,
       title: 'Integration',
       icon: '🔗',
-      bgColor: 'linear-gradient(to right, #06b6d4, #14b8a6)',
+      bgColor: '#1bc057',
       description: 'Seamless integration with 200+ popular business tools and custom API access for any platform.',
       details: ['200+ integrations', 'REST API', 'Custom webhooks', 'Zapier ready']
     },
@@ -58,9 +58,17 @@ export default function CardCarousel3D() {
       id: 7,
       title: 'Security Certified',
       icon: '🔒',
-      bgColor: 'linear-gradient(to right, #4b5563, #334155)',
+      bgColor: '#159542',
       description: 'ISO 27001, SOC 2, and GDPR certified with end-to-end encryption and regular security audits.',
       details: ['ISO 27001', 'SOC 2 certified', 'GDPR compliant', 'Pen tested']
+    },
+     {
+      id: 8,
+      title: 'Integration',
+      icon: '🔗',
+      bgColor: '#1bc057',
+      description: 'Seamless integration with 200+ popular business tools and custom API access for any platform.',
+      details: ['200+ integrations', 'REST API', 'Custom webhooks', 'Zapier ready']
     }
   ];
 

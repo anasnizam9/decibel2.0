@@ -16,15 +16,15 @@ type Leader = {
 const leaders: Leader[] = [
   {
     name: "Faisal Qamar",
-    title: "Co-founder & CEO",
+    title: "Co-Founder & CEO",
     bio: "Faisal Qamar, a visionary leader based out of the UAE, is one of the founders of Decibel BPO. He has played a pivotal role in pioneering the concept of business process management.",
-    image: "/images/newfq.png",
+    image: "/images/fq1.jpeg",
     fullBio:
       "Faisal Qamar, a visionary leader based out of the UAE, is one of the founders of Decibel BPO. He has played a pivotal role in pioneering the concept of business process outsourcing in developing economies. With over two decades of extensive global experience as a senior corporate executive, Faisal brings a wealth of expertise in designing and implementing innovative strategies that propel business growth and success.\n\nFaisal's journey in leadership spans across various prominent positions, including Group COO at SIDDCO Group, CFO at Pakistan Textile Company Limited, and General Manager for Financial Developments at the Arfeen Group of Companies. His diverse background and leadership roles have equipped him with a deep understanding of diverse industries and business environments.\n\nA distinguished chartered accountant, Faisal holds a master's certification in human resources from Cornell University, further enhancing his strategic acumen and leadership capabilities. His relentless commitment to excellence and passion for driving positive change continue to inspire and shape the success of Decibel BPO and its clients.",
   },
   {
     name: "Umair Ahmed",
-    title: "Co-founder & COO",
+    title: "Co-Founder & COO",
     bio: "Umair Ahmed, serving as the Chief Operating Officer at Decibel BPO, plays a pivotal role in defining the company's technology strategy and maintaining architectural coherence across the Products and Technology departments.",
     image: "/images/umairsir.png",
     fullBio:
@@ -32,7 +32,7 @@ const leaders: Leader[] = [
   },
   {
     name: "Abdul Samad",
-    title: "Senior General Manager - Business Development | Projects & Product",
+    title: "Senior GM – BD | Projects & Product",
     bio: "Abdul Samad, the Senior General Manager - Business Development | Projects & Product at Decibel BPO, plays a pivotal role in driving the company's strategic projects in addition to overseeing business growth strategies.",
     image: "/images/xyx.png",
     fullBio:
@@ -40,7 +40,7 @@ const leaders: Leader[] = [
   },
   {
     name: "Andaleeb Dawood",
-    title: "General Manager - Service Delivery & HR",
+    title: "GM – Service Delivery & HR",
     bio: "Andaleeb Dawood, serving as the General Manager - Service Delivery & HR and a pivotal member of the Business Leadership Team at Decibel BPO, spearheads client transformation on the enterprise cloud.",
     image: "/images/and.png",
     fullBio:
@@ -48,7 +48,7 @@ const leaders: Leader[] = [
   },
   {
     name: "Nabeel Baig",
-    title: "General Manager - Information Technology",
+    title: "GM - Information Technology",
     bio: "Nabeel Baig, an articulate and results-oriented IT professional, currently serves as the General Manager Information Technology at Decibel BPO.",
     image: "/images/nba.png",
     fullBio:

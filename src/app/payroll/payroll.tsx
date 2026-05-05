@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -223,6 +224,7 @@ export default function SuccessionPlanningPage() {
         </div>
       </section>
 
+      <TestimonialsSection />
       <Footer />
     </main>
   );
